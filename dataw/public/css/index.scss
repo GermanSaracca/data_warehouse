@@ -34,9 +34,12 @@ body{
         border-bottom: solid 6px $lightBlue;
 
         .navbar-brand {
-            display: flex;
             color: white;
             font-size: 40px;
+        }
+        #welcome {
+            color: $yellow;
+            margin-top: 2.5vh;
         }
 
         .rigth-nav{
@@ -63,9 +66,56 @@ body{
             }
 
             .btn{
-                @include button(white,$blue);
+                @include button($yellow,$blue);
                 text-transform: none;
-                border: solid 1px white;
+                border: solid 1px $yellow;
+            }
+        }
+    }
+    .container{
+        display: flex;
+        align-items: center;
+        margin-top: 10vh;
+        padding-top: 275px;
+        color: white;
+        background: $blue;
+        border: solid 5px $blue;
+        border-radius: 10px;
+        width: 70vw;
+        height: 70vh;
+        overflow-y: auto;
+        scroll-padding: 50px 0 0 50px;
+        
+        
+        &::-webkit-scrollbar{
+            width: 0.7em;
+            cursor: pointer;
+            height: 30px;
+        }
+
+
+        &::-webkit-scrollbar-thumb {
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: $lightBlue;
+        }
+        &::-webkit-scrollbar-track {
+            border: 14px solid white;
+            border-radius: 53px;
+            
+          }
+
+        .informacion{
+            padding: 2vw;
+
+            .underlined{
+                color: $yellow;
+                margin-left: -20px;
+                text-decoration: underline;
+            }
+
+            li{
+                padding: 10px 0;
             }
         }
     }

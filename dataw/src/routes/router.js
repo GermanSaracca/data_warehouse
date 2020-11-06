@@ -5,17 +5,21 @@ const path = require('path');
 
 //Controllers
 const loginCtrl = require('../controllers/login');
+const auth = require('../middlewares/auth');
+
+// Rutas
 
 
 //Renderizo pagina inicial de login
-router.route('/').get((req,res)=>{
+router.route('/').get()
 
-    //Pagina de inicio es login
-    res.sendFile(path.join(__dirname, '../public/login.html'));
 
-})
+//Rutas
 
-router.route('/login').post(loginCtrl.login);
+router.route('/login').post(loginCtrl.login); // Log in de usuario 
+
+router.route('/auth').get(auth); //Autenticacion con token de usuario 
+
 
 
 

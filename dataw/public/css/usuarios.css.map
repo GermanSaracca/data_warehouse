@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,CAAC,CAAA;EACG,UAAU,EAAE,UAAU;EACtB,OAAO,EAAE,CAAC;EACV,MAAM,EAAE,CAAC;EACT,WAAW,EENR,aAAa,EAAE,SAAS;CFO9B",
+    "sources": [
+        "usuarios.scss",
+        "colors.scss",
+        "fonts.scss"
+    ],
+    "names": [],
+    "file": "usuarios.css"
+}

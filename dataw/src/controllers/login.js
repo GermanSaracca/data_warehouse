@@ -2,8 +2,9 @@ const response = require('../responses/response');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 const {jwtSign} = require('../global/envs');
-
+const {loginSchema} = require('../controllers/joiValidations');
 
 
 class LoginController {
@@ -12,6 +13,15 @@ class LoginController {
 
         let {email,password} = req.body;
 
+        //Validar con Joi primero
+        const { error }= loginSchema.validate(req.body);
+
+        if( error ){
+
+            res.send( error );
+            return;
+        }
+        
         //Verifico que exista el usuario
         // Busco todos los usuarios en db
         let users = await User.find();

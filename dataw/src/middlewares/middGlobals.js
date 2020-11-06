@@ -2,7 +2,7 @@ const cors = require('cors');
 const expressjwt = require('express-jwt');
 const helmet = require('helmet');
 const rateLimit = require("express-rate-limit");
-const token = require('../global/envs');
+const {jwtSign} = require('../global/envs');
 const express = require('express');
 
 //Luego se cambiara, ahora lo dejo asi para poder hacer pruebas.
@@ -24,9 +24,9 @@ module.exports = function(app){
     // Limito a 400 requests por hora
     app.use(limiter);
     //uso tokens en todas las rutas excepto login y signup
-    /*
-    app.use(expressjwt({ secret: token, algorithms: ["HS256"] })
-    .unless({path: ['/login', "/signup", "/"]}));*/
+    
+    app.use(expressjwt({ secret: jwtSign, algorithms: ["HS256"] })
+    .unless({path: ['/login', "/home", "/"]}));
 
 
 };

@@ -22,11 +22,13 @@ body .navbar {
 }
 
 body .navbar .navbar-brand {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   color: white;
   font-size: 40px;
+}
+
+body .navbar #welcome {
+  color: #E9C46A;
+  margin-top: 2.5vh;
 }
 
 body .navbar .rigth-nav {
@@ -61,17 +63,67 @@ body .navbar .rigth-nav .nav-ul a:hover {
 }
 
 body .navbar .rigth-nav .btn {
-  color: white;
+  color: #E9C46A;
   background-color: #0B222C;
   border: none;
   font-weight: 500;
   text-transform: uppercase;
   text-transform: none;
-  border: solid 1px white;
+  border: solid 1px #E9C46A;
 }
 
 body .navbar .rigth-nav .btn:hover {
-  color: white;
+  color: #E9C46A;
   background-color: #2A9D8F;
+}
+
+body .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 10vh;
+  padding-top: 275px;
+  color: white;
+  background: #0B222C;
+  border: solid 5px #0B222C;
+  border-radius: 10px;
+  width: 70vw;
+  height: 70vh;
+  overflow-y: auto;
+  scroll-padding: 50px 0 0 50px;
+}
+
+body .container::-webkit-scrollbar {
+  width: 0.7em;
+  cursor: pointer;
+  height: 30px;
+}
+
+body .container::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #2A9D8F;
+}
+
+body .container::-webkit-scrollbar-track {
+  border: 14px solid white;
+  border-radius: 53px;
+}
+
+body .container .informacion {
+  padding: 2vw;
+}
+
+body .container .informacion .underlined {
+  color: #E9C46A;
+  margin-left: -20px;
+  text-decoration: underline;
+}
+
+body .container .informacion li {
+  padding: 10px 0;
 }
 /*# sourceMappingURL=index.css.map */

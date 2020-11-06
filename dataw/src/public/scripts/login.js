@@ -38,27 +38,42 @@ async function validateAndSend(){
             password: password
         }
 
-        fetch(`${basepathServer}login`, {
+        let fetchLogin = await fetch(`${basepathServer}login`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(user)
-        })
-        .then(resp => resp.json())
-        .then(data =>{
+        });
 
-            //RECIBO EL TOKEN!!!!!------***************-----------------------------************
-            console.log(data);
-
-            if(data.codigo == 403){
-
-                errorsMessage.innerText = data.mensaje;
-                console.log(data);
-            }
-        })
+        let respFetchLogin = await fetchLogin.json();
 
 
+        if(respFetchLogin.codigo == 403){
+
+            errorsMessage.innerText = respFetchLogin.mensaje;
+
+        } else {
+
+            //RECIBO EL TOKEN!!!!!------
+            let token = respFetchLogin.token;
+            // Guardo el token en localStorage
+            localStorage.setItem("token", JSON.stringify(token));
+            console.log(token);
+            
+            let fetchLogin2 = await fetch(`${basepathServer}home`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            
+
+            window.location.href = `${basepathServer}home`;
+
+
+        }
     }
 }
 
