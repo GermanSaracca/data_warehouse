@@ -76,7 +76,6 @@ body{
         display: flex;
         align-items: center;
         margin-top: 10vh;
-        padding-top: 275px;
         color: white;
         background: $blue;
         border: solid 5px $blue;
@@ -84,6 +83,7 @@ body{
         width: 70vw;
         height: 70vh;
         overflow-y: auto;
+        overflow-x: hidden;
         scroll-padding: 50px 0 0 50px;
         
         
@@ -106,6 +106,7 @@ body{
           }
 
         .informacion{
+            margin-top: auto;
             padding: 2vw;
 
             .underlined{

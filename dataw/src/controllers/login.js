@@ -2,9 +2,8 @@ const response = require('../responses/response');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Joi = require('joi');
 const {jwtSign} = require('../global/envs');
-const {loginSchema} = require('../controllers/joiValidations');
+const {loginSchema} = require('../validations/joiValidations');
 
 
 class LoginController {
@@ -21,14 +20,15 @@ class LoginController {
             res.send( error );
             return;
         }
-        
         //Verifico que exista el usuario
         // Busco todos los usuarios en db
         let users = await User.find();
 
         const findByEmail = users.find(user => user.email === email);
-        
-        
+        const findProfile = await User.find( {email: email});
+        const profile = findProfile[0].profile;
+ 
+    
         //Si el email = undefined quiere decir que no existe tal usuario
         if(findByEmail == undefined){
 
@@ -51,8 +51,7 @@ class LoginController {
                     // Creo el Token
                     const accessToken = jwt.sign(infoUser,jwtSign);
 
-    
-                    let resp = new response(false,202,'Token creado',accessToken);
+                    let resp = new response(false,202,profile,accessToken);
                     res.send(resp);
     
                 }else{
@@ -65,9 +64,7 @@ class LoginController {
     
                 res.status(500).send();
             }
-
         }
-
     }
 }
 

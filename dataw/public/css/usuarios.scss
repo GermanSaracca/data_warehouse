@@ -22,4 +22,174 @@
     }
 }
 
+body{
+    
+    background-color: $yellow;
 
+    .navbar{
+        display: flex;
+        align-content: center;
+        background: $blue;
+        height: 10vh;
+        border-bottom: solid 6px $lightBlue;
+
+        .navbar-brand {
+            color: white;
+            font-size: 40px;
+        }
+        #welcome {
+            color: $yellow;
+            margin-top: 2.5vh;
+        }
+
+        .rigth-nav{
+
+            display: flex;
+            align-items: center;
+
+            .nav-ul{
+                display: flex;
+                justify-content: space-between;
+                width: 50vw;
+                margin-top: 2.5vh;
+                margin-right:4vw;
+                list-style: none;
+
+                a{
+                    text-decoration: none;
+                    color: white;
+
+                    &:hover{
+                        color: $yellow;
+                    }
+                }
+            }
+
+            .btn{
+                @include button($yellow,$blue);
+                text-transform: none;
+                border: solid 1px $yellow;
+            }
+        }
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3vh;
+        border: solid 5px $blue;
+        border-radius: 10px;
+        background-color: white;
+        width: 35vw;
+        height: auto;
+        margin-top: 20px;
+
+        a{
+            font-weight: 500;
+            margin-top: 20px;
+            color: $blue;
+        }
+    
+        .errorsContainer{
+            display:flex;
+            justify-content: center;
+            
+            small{
+                color:red;
+                font-weight: 700;
+            }
+        }
+        h1{
+            font-weight: 500;
+        }
+        .fa-rainbow{
+            font-size: 40px;
+        }
+        .loginForm{
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+
+
+            label{
+                font-weight: 500;
+                color: $blue;
+            }
+            input {
+                border: solid 2px $lightBlue;
+                color: $blue;
+            }
+            select {
+                border: solid 2px $lightBlue;
+                color: $blue;
+            }
+            .text-muted {
+                display: none;
+            }
+            .password-visibility {
+                display: flex;
+
+                .fa-eye-slash{
+                    margin: 10px 0 0 -30px;
+                    color: $blue;
+                    cursor: pointer;
+                }
+                .fa-eye{
+                    margin: 10px 0 0 -30px;
+                    color: $blue;
+                    cursor: pointer;
+                }
+            }
+            .btn {
+                @include button(white,$blue);
+                width: 30vw;
+                height: 3.5vw;
+                margin-top: 10px;
+                
+            }
+        }
+    }
+    .alert {
+        padding: 20px;
+        background-color: $lightBlue;
+        color: white;
+        width: 22vw;
+        margin-top: 10vh;
+        margin-left: 2vw;
+        display: block;
+        position: absolute;
+
+              /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .closebtn:hover {
+            color: $blue;
+        }
+    }
+    .center-alert{
+
+        display: flex;
+        justify-content: center;
+
+
+        .alertCreation {
+            @extend .alert;
+            font-size: 36px;
+            background-color: green;
+            width: 70vw;
+            display: none;//Cambiado desde JS a display: block;
+            position: absolute;
+            z-index: 1;
+            text-align: center;
+        }
+    }
+}

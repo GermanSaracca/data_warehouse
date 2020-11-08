@@ -10,7 +10,7 @@ const UserSchema = new Schema({
 
     email:{ type: String, unique: true, required:true },
 
-    profile:{ type: String, required:true },
+    profile:{ type: String, enum: ['Admin','User'], required:true },
 
     password:{ type: String, required:true },
 

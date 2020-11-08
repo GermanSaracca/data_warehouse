@@ -5,4 +5,234 @@
   margin: 0;
   font-family: "Roboto Mono", monospace;
 }
+
+body {
+  background-color: #E9C46A;
+}
+
+body .navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background: #0B222C;
+  height: 10vh;
+  border-bottom: solid 6px #2A9D8F;
+}
+
+body .navbar .navbar-brand {
+  color: white;
+  font-size: 40px;
+}
+
+body .navbar #welcome {
+  color: #E9C46A;
+  margin-top: 2.5vh;
+}
+
+body .navbar .rigth-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .navbar .rigth-nav .nav-ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 50vw;
+  margin-top: 2.5vh;
+  margin-right: 4vw;
+  list-style: none;
+}
+
+body .navbar .rigth-nav .nav-ul a {
+  text-decoration: none;
+  color: white;
+}
+
+body .navbar .rigth-nav .nav-ul a:hover {
+  color: #E9C46A;
+}
+
+body .navbar .rigth-nav .btn {
+  color: #E9C46A;
+  background-color: #0B222C;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-transform: none;
+  border: solid 1px #E9C46A;
+}
+
+body .navbar .rigth-nav .btn:hover {
+  color: #E9C46A;
+  background-color: #2A9D8F;
+}
+
+body .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3vh;
+  border: solid 5px #0B222C;
+  border-radius: 10px;
+  background-color: white;
+  width: 35vw;
+  height: auto;
+  margin-top: 20px;
+}
+
+body .container a {
+  font-weight: 500;
+  margin-top: 20px;
+  color: #0B222C;
+}
+
+body .container .errorsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .container .errorsContainer small {
+  color: red;
+  font-weight: 700;
+}
+
+body .container h1 {
+  font-weight: 500;
+}
+
+body .container .fa-rainbow {
+  font-size: 40px;
+}
+
+body .container .loginForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 95%;
+}
+
+body .container .loginForm label {
+  font-weight: 500;
+  color: #0B222C;
+}
+
+body .container .loginForm input {
+  border: solid 2px #2A9D8F;
+  color: #0B222C;
+}
+
+body .container .loginForm select {
+  border: solid 2px #2A9D8F;
+  color: #0B222C;
+}
+
+body .container .loginForm .text-muted {
+  display: none;
+}
+
+body .container .loginForm .password-visibility {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .container .loginForm .password-visibility .fa-eye-slash {
+  margin: 10px 0 0 -30px;
+  color: #0B222C;
+  cursor: pointer;
+}
+
+body .container .loginForm .password-visibility .fa-eye {
+  margin: 10px 0 0 -30px;
+  color: #0B222C;
+  cursor: pointer;
+}
+
+body .container .loginForm .btn {
+  color: white;
+  background-color: #0B222C;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  width: 30vw;
+  height: 3.5vw;
+  margin-top: 10px;
+}
+
+body .container .loginForm .btn:hover {
+  color: white;
+  background-color: #2A9D8F;
+}
+
+body .alert, body .center-alert .alertCreation {
+  padding: 20px;
+  background-color: #2A9D8F;
+  color: white;
+  width: 22vw;
+  margin-top: 10vh;
+  margin-left: 2vw;
+  display: block;
+  position: absolute;
+  /* The close button */
+}
+
+body .alert .closebtn, body .center-alert .alertCreation .closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+body .alert .closebtn:hover, body .center-alert .alertCreation .closebtn:hover {
+  color: #0B222C;
+}
+
+body .center-alert {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .center-alert .alertCreation {
+  font-size: 36px;
+  background-color: green;
+  width: 70vw;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+}
 /*# sourceMappingURL=usuarios.css.map */

@@ -2,9 +2,10 @@
 const logOut = document.getElementById('logOut');
 import { basepathClient, basepathServer } from './globals.js';
 const welcome = document.getElementById('welcome');
+const usuariosLi = document.getElementById('usuariosLi');
+const ul = document.getElementById('ul');
 //*Event Listeners
 document.addEventListener('DOMContentLoaded',fetchAuth);
-
 
 //Funciones
 
@@ -12,6 +13,14 @@ document.addEventListener('DOMContentLoaded',fetchAuth);
 async function fetchAuth(){
 
     const token = JSON.parse(localStorage.getItem('token'));
+    const profile = JSON.parse(localStorage.getItem('profile'));
+
+    console.log(profile);
+    if(profile == 'User'){
+
+        usuariosLi.remove();
+        ul.style.justifyContent = 'space-around';
+    }
 
     if(token === null){
 
@@ -44,6 +53,7 @@ async function fetchAuth(){
 logOut.addEventListener('click',()=>{
 
     localStorage.removeItem('token');
+    localStorage.removeItem('profile');
     fetchAuth();
 })
 

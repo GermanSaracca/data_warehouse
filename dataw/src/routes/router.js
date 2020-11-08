@@ -5,6 +5,7 @@ const path = require('path');
 
 //Controllers
 const loginCtrl = require('../controllers/login');
+const register = require('../controllers/register');
 const auth = require('../middlewares/auth');
 
 // Rutas
@@ -19,6 +20,8 @@ router.route('/').get()
 router.route('/login').post(loginCtrl.login); // Log in de usuario 
 
 router.route('/auth').get(auth); //Autenticacion con token de usuario 
+
+router.route('/register').post(register); //Registro de usuarios nuevos
 
 
 

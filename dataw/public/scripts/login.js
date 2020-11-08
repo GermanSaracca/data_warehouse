@@ -1,9 +1,8 @@
 const inputEmail = document.getElementById('email');
 const inputPassword = document.getElementById('password');
 const submitBtn = document.getElementById('btn');
-const emailHelper = document.getElementById('emailHelpBlock');
-const passHelper = document.getElementById('passwordHelpBlock');
 const errorsMessage = document.getElementById('errors');
+const input = document.getElementsByClassName('form-control');
 
 //Variable Global
 import { basepathServer } from './globals.js';
@@ -12,10 +11,13 @@ import { basepathClient } from './globals.js';
 
 //Event Listeners
 document.addEventListener('DOMContentLoaded',alreadyLogIn);
-
-submitBtn.addEventListener('click',validateAndSend);
+submitBtn.addEventListener('click',logInUser);
+input[0].addEventListener('keydown',()=>{if(errorsMessage.innerText != ''){errorsMessage.innerText = '';}});
+input[1].addEventListener('keydown',()=>{if(errorsMessage.innerText != ''){errorsMessage.innerText = '';}});
 
 //Funciones
+
+
 
 //Funcion para detectar que no este logueado, si lo esta no puede acceder al login
 function alreadyLogIn(){
@@ -30,7 +32,7 @@ function alreadyLogIn(){
 }
 
 //Enviar form de login a servidor para acceder a homepage
-async function validateAndSend(event){
+async function logInUser(event){
 
     // Prevent form to submit
     event.preventDefault();
@@ -54,7 +56,6 @@ async function validateAndSend(event){
 
     let respFetchLogin = await fetchLogin.json();
 
-    console.log(respFetchLogin);
     //Si existe error dentro de la validacion de joi en servidor
     if(respFetchLogin.details){
 
@@ -67,10 +68,12 @@ async function validateAndSend(event){
 
     } else {
 
-        //RECIBO EL TOKEN!!!!!------
+        //RECIBO EL TOKEN y PROFILE
+        let profile = respFetchLogin.mensaje;
         let token = respFetchLogin.token;
         // Guardo el token en localStorage
         localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem('profile',JSON.stringify(profile));
 
         window.location.href = `${basepathClient}home.html`;
     }
