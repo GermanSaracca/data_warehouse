@@ -4,9 +4,12 @@ import { basepathClient, basepathServer } from './globals.js';
 const welcome = document.getElementById('welcome');
 const usuariosLi = document.getElementById('usuariosLi');
 const ul = document.getElementById('ul');
+const burger = document.getElementById('burger');
+const menu = document.getElementById('rigth-nav');
+
 //*Event Listeners
 document.addEventListener('DOMContentLoaded',fetchAuth);
-
+burger.addEventListener('click',toogleMenu);
 //Funciones
 
 //Funcion para detectar que este logueado, si no lo esta lo mandamos a la pagina de login
@@ -38,9 +41,10 @@ async function fetchAuth(){
     
         let fetchJson = await fetchLogin.json();
 
-        let email = fetchJson.token.email;
+        let email = fetchJson.data.email;
 
-        welcome.innerText = `Welcome ${email}`;
+        //Mensaje de Bienvenida
+        welcome.innerText = `Bienvenido ${email}`;
 
         if(fetchJson.codigo === 403){
     
@@ -48,6 +52,19 @@ async function fetchAuth(){
         }
     }
 }
+
+function toogleMenu() {
+    
+    if (burger.className == 'fas fa-bars') {
+
+        burger.className = 'fas fa-times';
+        menu.style.display = 'flex';
+    }else {
+        burger.className = 'fas fa-bars'
+        menu.style.display = 'none';
+    }
+};
+
 
 //Desloguea usuario, remueve token de local storage y llama de nuevo a la funcion fetchAuth
 logOut.addEventListener('click',()=>{

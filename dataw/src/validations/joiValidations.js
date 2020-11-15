@@ -22,8 +22,33 @@ const registerSchema = Joi.object({
 
 });
 
+const ciudadJoi = Joi.object({
+
+    ciudad: Joi.string().min(2)
+});
+
+const paisJoi = Joi.object({
+
+    pais: Joi.string().min(2)
+});
+
+const regionJoi = Joi.object({
+
+    region: Joi.string().min(2)
+});
+
+
+
 module.exports = {
    
-    loginSchema : loginSchema,
-    registerSchema : registerSchema
+    loginJoi : loginSchema,
+
+    registerJoi : registerSchema,
+
+    ciudadJoi : ciudadJoi,
+
+    paisJoi: paisJoi,
+
+    regionJoi : regionJoi
+
 }

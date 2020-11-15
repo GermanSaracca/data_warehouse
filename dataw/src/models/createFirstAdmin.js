@@ -11,7 +11,7 @@ async function createFirstAdmin(){
     if(existsAdmin == ''){
 
         //Hasheo contraseña
-        let hashedPassword = await bcrypt.hash('Ger12345', 10);
+        let hashedPassword = await bcrypt.hash('Ger12345', 10);//Esta password deberia estar en archivo .ENV
 
         const newUser = new User({
             name: "Germán",

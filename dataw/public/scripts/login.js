@@ -70,7 +70,7 @@ async function logInUser(event){
 
         //RECIBO EL TOKEN y PROFILE
         let profile = respFetchLogin.mensaje;
-        let token = respFetchLogin.token;
+        let token = respFetchLogin.data;
         // Guardo el token en localStorage
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem('profile',JSON.stringify(profile));

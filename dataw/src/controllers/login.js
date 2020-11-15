@@ -3,69 +3,67 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {jwtSign} = require('../global/envs');
-const {loginSchema} = require('../validations/joiValidations');
+const {loginJoi} = require('../validations/joiValidations');
 
 
-class LoginController {
+async function login(req,res){
 
-    async login(req,res){
+    let {email,password} = req.body;
 
-        let {email,password} = req.body;
+    //Validar con Joi primero
+    const { error }= loginJoi.validate(req.body);
 
-        //Validar con Joi primero
-        const { error }= loginSchema.validate(req.body);
+    if( error ){
 
-        if( error ){
+        res.send( error );
+        return;
+    }
+    //Verifico que exista el usuario
+    // Busco todos los usuarios en db
+    let users = await User.find();
 
-            res.send( error );
-            return;
-        }
-        //Verifico que exista el usuario
-        // Busco todos los usuarios en db
-        let users = await User.find();
+    const findByEmail = users.find(user => user.email === email);
+    const findProfile = await User.find( {email: email});
+    const profile = findProfile[0].profile;
 
-        const findByEmail = users.find(user => user.email === email);
-        const findProfile = await User.find( {email: email});
-        const profile = findProfile[0].profile;
- 
-    
-        //Si el email = undefined quiere decir que no existe tal usuario
-        if(findByEmail == undefined){
 
-            let resp = new response(true,403,'No existe usuario con ese email');
-            res.send(resp);
-        }else{
-            const emailDB = findByEmail.email;
-            const hashedPass = findByEmail.password;
+    //Si el email = undefined quiere decir que no existe tal usuario
+    if(findByEmail == undefined){
 
-            //Creo objeto usuario para enviar dentrod el payload
-            let infoUser= {
-                email: emailDB
-            };
+        let resp = new response(true,403,'No existe usuario con ese email');
+        res.send(resp);
+    }else{
+        const emailDB = findByEmail.email;
+        const hashedPass = findByEmail.password;
 
-            try{
-                // Si la contraseña corresponde CREO Y ENVIO token
+        //Creo objeto usuario para enviar dentrod el payload
+        let infoUser= {
+            email: emailDB
+        };
 
-                if(await bcrypt.compare(password,hashedPass)) {
+        try{
+            // Si la contraseña corresponde CREO Y ENVIO token
 
-                    // Creo el Token
-                    const accessToken = jwt.sign(infoUser,jwtSign);
+            if(await bcrypt.compare(password,hashedPass)) {
 
-                    let resp = new response(false,202,profile,accessToken);
-                    res.send(resp);
-    
-                }else{
-    
-                    let resp = new response(true,403,'Contraseña incorrecta');
-                    res.send(resp);
-                }
-    
-            }catch(error){
-    
-                res.status(500).send();
+                // Creo el Token
+                const accessToken = jwt.sign(infoUser,jwtSign);
+
+                let resp = new response(false,202,profile,accessToken);
+                res.send(resp);
+
+            }else{
+
+                let resp = new response(true,403,'Contraseña incorrecta');
+                res.send(resp);
             }
+
+        }catch(error){
+
+            res.status(500).send();
         }
     }
 }
 
-module.exports = new LoginController();
+
+module.exports = login;

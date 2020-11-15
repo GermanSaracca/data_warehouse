@@ -11,7 +11,6 @@ function auth(req,res,next){
         const token = req.headers.authorization.split(' ')[1];
         // Verifico el token con la firma secreta y el token enviado por el cliente
         const verifyToken = jwt.verify(token,jwtSign);
-
         let resp = new response(false,200,"Usuario autenticado",verifyToken);
         res.send(resp);
         

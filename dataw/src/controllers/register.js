@@ -1,7 +1,7 @@
 const response = require('../responses/response');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const {registerSchema} = require('../validations/joiValidations');
+const {registerJoi} = require('../validations/joiValidations');
 
 
 const register = async(req,res)=>{
@@ -9,7 +9,7 @@ const register = async(req,res)=>{
     let { name, lastname, email, profile, password } = req.body;
 
     //Validar con Joi primero
-    const { error }= registerSchema.validate(req.body);
+    const { error }= registerJoi.validate(req.body);
 
     if( error ){
 

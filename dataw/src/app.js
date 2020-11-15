@@ -6,10 +6,6 @@ const middlewares = require('./middlewares/middGlobals');
 const {db, URI_connection } = require('./database/mongo_connection');
 const createFirstAdmin = require('./models/createFirstAdmin');
 
-
-//Renders
-app.use(express.static(__dirname + '/public'));
-
 //Varios middlewares
 middlewares(app);
 
