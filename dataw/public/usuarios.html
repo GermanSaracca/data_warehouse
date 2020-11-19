@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/usuarios.css">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" id="nav">
         <a class="navbar-brand" href="./home.html">
             <i class="fas fa-rainbow"></i>
         </a>
@@ -48,25 +48,27 @@
         </div>
     </nav>
     <main>
-        <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            Aquí se crearan los usuarios <strong>(empleados de la compañía)</strong> que podrán utilizar la app.<br>
-            Un Admin puede realizar todo, un User puede realizar todo excepto crear usuarios nuevos.
-        </div>
-        <div class="center-alert">
-            <div class="alert alertCreation" id="alertCreation">
+        <section class="first">
+            <div class="alert">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                Nuevo usuario registrado con exito!!
+                Aquí se crearan los usuarios <strong>(empleados de la compañía)</strong> que podrán utilizar la app.<br>
+                Un Admin puede realizar todo, un User puede realizar todo excepto crear usuarios nuevos.<br><br>
+                En la seccion de abajo <i class="fas fa-arrow-down"></i> podrás ver, editar o eliminiar cualquier usuario.
             </div>
-        </div>
-        <div class="container">
-            <i class="fas fa-rainbow"></i>
-            <h2>Nuevo usuario</h2>
+            <div class="center-alert">
+                <div class="alert alertCreation" id="alertCreation">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    Nuevo usuario registrado con exito!!
+                </div>
+            </div>
+            <div class="container" >
+                <i class="fas fa-rainbow"></i>
+                <h2>Nuevo usuario</h2>
                 <form class="loginForm">
-                    <div class="form-group">
+                    <div class="form-group" >
                         <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                    </div>
-                    <div class="form-group">
+                    </div> 
+                    <div class="form-group" >    
                         <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname" required>
                     </div>
                     <div class="form-group">
@@ -94,13 +96,45 @@
                     </div>
                     <button type="submit" class="btn btn-primary" id="btnSubmit">Registrar</button>
                 </form>
-    
             </div>
-        </div>
+            <a href="#second"><i class="fas fa-arrow-down"></i></a>
+            
+        </section>
+
+
+
+        <section class="second">
+            <a href="#nav" id="second"><i class="fas fa-arrow-up"></i></a>
+
+            <div class="users-container">
+                <i class="fas fa-rainbow"></i>
+                <h1 class="title-lista">Lista de Usuarios</h1>
+                <div class="table-fields">
+                    <div class="field">Name</div>
+                    <div class="field">Lastname</div>
+                    <div class="field">Email</div>
+                    <div class="field">Profile</div>
+                    <div class="field">Edit/Delete</div>
+                </div>
+                <div class="users-table" id="users-table">
+
+                    <!-- <div class="user-row">
+                        <div class="user-info">German</div>
+                        <div class="user-info">Saracca</div>
+                        <div class="user-info">serigrafiatasd@gmail.com</div>
+                        <div class="user-info">Admin</div>
+                        <div class="user-edit">
+                            <i class="fas fa-user-edit" ></i>
+                            <i class="fas fa-trash-alt" ></i>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+
+
     </main>
-
-
-
 
 <!--Script para asegurar que el usuario esta logueado-->
 <script src="./scripts/home.js" type="module"></script>

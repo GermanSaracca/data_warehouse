@@ -22,20 +22,15 @@ const registerSchema = Joi.object({
 
 });
 
-const ciudadJoi = Joi.object({
+const nameSchema = Joi.object({
 
-    ciudad: Joi.string().min(2)
+    name: Joi.string().min(2)
 });
+const idSchema = Joi.object({
 
-const paisJoi = Joi.object({
+    _id: Joi.string().alphanum().min(24).max(24).required()
+})
 
-    pais: Joi.string().min(2)
-});
-
-const regionJoi = Joi.object({
-
-    region: Joi.string().min(2)
-});
 
 
 
@@ -45,10 +40,14 @@ module.exports = {
 
     registerJoi : registerSchema,
 
-    ciudadJoi : ciudadJoi,
+    nameJoi : nameSchema,
 
-    paisJoi: paisJoi,
-
-    regionJoi : regionJoi
+    idJoi : idSchema
 
 }
+
+            // //Validar con Joi primero
+            // const { error } = nameJoi.validate(pais);
+            // if( error ){
+            //     throw error.details[0].message;
+            // }

@@ -1,32 +1,31 @@
 const { Schema, model } = require('mongoose');
-const { ciudadJoi } = require('../validations/joiValidations');
 
 //Creo Schema de ciudades
-const ciudadSchema = new Schema({
+const citySchema = new Schema({
 
     name: { type: String, unique: true }
 });
-const ciudad = model('Ciudad', ciudadSchema);
+const city = model('City', citySchema);
 
-const paisSchema = new Schema({
+const countrySchema = new Schema({
 
     name: { type: String, unique: true },
 
-    ciudad: [{
+    cities: [{
         type: Schema.Types.ObjectId,
-        ref: 'Ciudad'
+        ref: 'City'
     }]
 });
-const pais = model('Pais',paisSchema);
+const country = model('Country',countrySchema);
 
 
 const regionSchema = new Schema ({
 
     name: { type: String, unique: true },
 
-    pais : [{
+    countries : [{
         type: Schema.Types.ObjectId,
-        ref: 'Pais'
+        ref: 'Country'
     }]
 });
 
@@ -34,7 +33,7 @@ const regionSchema = new Schema ({
 module.exports = {
 
     regionSchema : model('Region',regionSchema),
-    paisSchema : pais,
-    ciudadSchema : ciudad
+    countrySchema : country,
+    citySchema : city
 
 };
