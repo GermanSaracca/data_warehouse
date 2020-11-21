@@ -16,7 +16,7 @@ const countryCtrl =  require('../controllers/countries');
 const cityCtrl = require('../controllers/cities');
 
 
-//Rutas
+//***Rutas****
 
 //Logueo
 
@@ -26,34 +26,48 @@ router.route('/auth').get(auth); //Autenticacion con token de usuario para cualq
 
 // Admin
 
-router.route('/register').post(authAdmin,register); //Registro de usuarios nuevos
+router.route('/register').post(authAdmin,register); 
 
-router.route('/getUsers').get(admin.getUsers);
+router.route('/getUsers/:id').get(authAdmin,admin.getUsers);
 
-router.route('/updateUser').put();
+router.route('/updateUser/:_id').put(authAdmin,admin.updateUser);
 
-router.route('/deleteUser/:_id').delete(admin.deleteUser);
+router.route('/deleteUser/:_id').delete(authAdmin,admin.deleteUser);
+
+
+
 
 
 //Region
 
-router.route('/nuevaRegion').post(regionCtrl.newRegion); //Cargar nueva Region
+router.route('/newRegion').post(regionCtrl.newRegion); //Cargar nueva Region
 
-router.route('/actualizarRegion/:_id').put(regionCtrl.updateRegion); //Editar nombre de region
+router.route('/updateRegion/:_id').put(regionCtrl.updateRegion); //Editar nombre de region
 
-router.route('/borrarRegion/:_id').delete(regionCtrl.deleteRegion); // Borrar Region
+router.route('/deleteRegion/:_id').delete(regionCtrl.deleteRegion); // Borrar Region
 
-router.route('/regiones').get(regionCtrl.getRegions); // Obtener Regiones
-
+router.route('/regions').get(regionCtrl.getRegions); // Obtener Regiones
 
 
 //Pais
 
-router.route('/nuevoPais/:_id').post(countryCtrl.newCountry); //Cargar nuevo Pais
+router.route('/newCountry/:_id').post(countryCtrl.newCountry); //Cargar nuevo Pais
+
+router.route('/updateCountry/:_id').put(countryCtrl.updateCountry); //Actualizar pais
+
+router.route('/deleteCountry/:_id').delete(countryCtrl.deleteCountry); //Borrar pais
+
+router.route('/countries/:_id').get(); //Obtener todos los paises
 
 
 //Ciudad
-router.route('/nuevaCiudad/:_id').post(cityCtrl.newCity); //Cargar nueva Ciudad
+router.route('/newCity/:_id').post(cityCtrl.newCity); //Cargar nueva Ciudad
+
+router.route('/updateCity/:_id').put(cityCtrl.updateCity); //Actualizar Ciudad
+
+router.route('/deleteCity/:_id').delete(cityCtrl.deleteCity); //Borrar Ciudad
+
+router.route('/cities/:_id').get(); //
 
 
 

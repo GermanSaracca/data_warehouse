@@ -69,11 +69,14 @@ async function logInUser(event){
     } else {
 
         //RECIBO EL TOKEN y PROFILE
-        let profile = respFetchLogin.mensaje;
+        let profile = respFetchLogin.mensaje.profile;
+        let id = respFetchLogin.mensaje.id;
         let token = respFetchLogin.data;
         // Guardo el token en localStorage
         localStorage.setItem("token", JSON.stringify(token));
         localStorage.setItem('profile',JSON.stringify(profile));
+        localStorage.setItem('id',JSON.stringify(id));
+
 
         window.location.href = `${basepathClient}home.html`;
     }

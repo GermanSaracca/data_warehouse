@@ -16,7 +16,7 @@ const registerSchema = Joi.object({
 
     email: Joi.string().email({ tlds: { allow: false } }).required(),
 
-    profile: Joi.string().required(),
+    profile: Joi.string().valid('Admin','User').required(),
 
     password: Joi.string().min(8).alphanum().required()
 
@@ -29,7 +29,19 @@ const nameSchema = Joi.object({
 const idSchema = Joi.object({
 
     _id: Joi.string().alphanum().min(24).max(24).required()
-})
+});
+const updateUserSchema = Joi.object({
+
+    name: Joi.string().min(2).required(),
+
+    lastname: Joi.string().min(2).required(),
+
+    email: Joi.string().email({ tlds: { allow: false } }).required(),
+
+    profile: Joi.string().valid('Admin','User').required(),
+
+
+});
 
 
 
@@ -42,12 +54,8 @@ module.exports = {
 
     nameJoi : nameSchema,
 
-    idJoi : idSchema
+    idJoi : idSchema,
+
+    updateUserJoi : updateUserSchema
 
 }
-
-            // //Validar con Joi primero
-            // const { error } = nameJoi.validate(pais);
-            // if( error ){
-            //     throw error.details[0].message;
-            // }

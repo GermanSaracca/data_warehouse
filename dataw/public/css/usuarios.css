@@ -37,7 +37,7 @@ body .navbar .navbar-brand {
 }
 
 body .navbar #welcome {
-  color: #E9C46A;
+  color: #F9DB6D;
   margin-top: 2.5vh;
 }
 
@@ -81,6 +81,10 @@ body .navbar .rigth-nav .nav-ul {
   list-style: none;
 }
 
+body .navbar .rigth-nav .nav-ul .linkActive {
+  color: #F9DB6D;
+}
+
 @media screen and (max-width: 1020px) {
   body .navbar .rigth-nav .nav-ul {
     -webkit-box-orient: vertical;
@@ -104,28 +108,28 @@ body .navbar .rigth-nav .nav-ul a {
 }
 
 body .navbar .rigth-nav .nav-ul a:hover {
-  color: #E9C46A;
+  color: #F9DB6D;
   -webkit-transition: 0.25s ease-in;
   transition: 0.25s ease-in;
 }
 
 body .navbar .rigth-nav .btn {
-  color: #E9C46A;
+  color: #F9DB6D;
   background-color: #0B222C;
   border: none;
   font-weight: 500;
   text-transform: uppercase;
   text-transform: none;
-  border: solid 1px #E9C46A;
+  border: solid 1px #F9DB6D;
 }
 
 body .navbar .rigth-nav .btn:hover {
-  color: #E9C46A;
+  color: #F9DB6D;
   background-color: #2A9D8F;
 }
 
 body .first {
-  background-color: #E9C46A;
+  background-color: #F9DB6D;
   height: 90vh;
 }
 
@@ -333,12 +337,13 @@ body .second .users-container {
 }
 
 body .second .users-container .title-lista {
-  margin-top: 20px;
-  color: #0B222C;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  color: white;
 }
 
 body .second .users-container .fa-rainbow {
-  color: #0B222C;
+  color: white;
   font-size: 40px;
 }
 
@@ -349,7 +354,7 @@ body .second .users-container .table-fields {
       grid-template-columns: .8fr .8fr 1.6fr .6fr 1fr;
   grid-auto-rows: 40px;
   width: 70vw;
-  background-color: #E9C46A;
+  background-color: #F9DB6D;
   color: #0B222C;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -444,5 +449,62 @@ body .second .users-container .users-table .user-row .user-edit i:hover {
   color: white;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+body .second #deleteModal .modal-header, body .second #updateModal .modal-header {
+  background-color: #F9DB6D;
+  color: #0B222C;
+}
+
+body .second #deleteModal .modal-footer .btn-secondary, body .second #updateModal .modal-footer .btn-secondary {
+  color: white;
+  background-color: #1cca1c;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-transform: none;
+}
+
+body .second #deleteModal .modal-footer .btn-secondary:hover, body .second #updateModal .modal-footer .btn-secondary:hover {
+  color: white;
+  background-color: #2A9D8F;
+}
+
+body .second #deleteModal .modal-footer .btn-secondary:hover, body .second #updateModal .modal-footer .btn-secondary:hover {
+  color: white;
+  background-color: #0e910e;
+}
+
+body .second #deleteModal .modal-footer .btn-primary, body .second #updateModal .modal-footer .btn-primary {
+  color: #0B222C;
+  background-color: #F9DB6D;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-transform: none;
+}
+
+body .second #deleteModal .modal-footer .btn-primary:hover, body .second #updateModal .modal-footer .btn-primary:hover {
+  color: #0B222C;
+  background-color: #2A9D8F;
+}
+
+body .second #deleteModal .modal-footer .btn-primary:hover, body .second #updateModal .modal-footer .btn-primary:hover {
+  color: white;
+  background-color: #af2007;
+}
+
+body .second #updateModal .modal-body input, body .second #updateModal .modal-body select {
+  border: solid 1.5px #2A9D8F;
+  color: #0B222C;
+}
+
+body .second #updateModal .modal-footer {
+  background-color: #F9DB6D;
+}
+
+body .second #updateModal .modal-footer .btn-primary {
+  background-color: #0B222C;
+  color: white;
 }
 /*# sourceMappingURL=usuarios.css.map */

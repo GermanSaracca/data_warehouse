@@ -20,6 +20,7 @@ async function authAdmin(req,res,next){
         if(profile == 'Admin'){
 
             next();
+            
         } else { 
             
             let resp = new response(true,403,"Usted no posee los privilegios para realizar esta operacion");

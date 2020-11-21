@@ -76,6 +76,10 @@ body{
                 margin-top: 2.5vh;
                 margin-right:4vw;
                 list-style: none;
+                
+                .linkActive {
+                    color: $yellow;
+                }
 
                 @media screen and (max-width: 1020px) {
 
@@ -265,11 +269,12 @@ body{
             height: 95vh;
 
             .title-lista{
-                margin-top: 20px;
-                color: $blue;
+                margin-top: 10px;
+                margin-bottom: 25px;
+                color: white;
             }
             .fa-rainbow {
-                color: $blue;
+                color: white;
                 font-size: 40px;
             }
             .table-fields {
@@ -351,6 +356,50 @@ body{
                 }
             }
         }
+        #deleteModal{
+
+            .modal-header {
+                background-color: $yellow;
+                color: $blue;
+            }
+            .modal-footer {
+                .btn-secondary{
+                    @include button(white,rgb(28, 202, 28));
+                    text-transform: none;
+                    &:hover{
+                        color: white;
+                        background-color: rgb(14, 145, 14);
+                    }
+                }
+                .btn-primary{
+                    @include button($blue,$yellow);
+                    text-transform: none;
+                    &:hover{
+                        color: white;
+                        background-color: rgb(175, 32, 7);
+                    }
+                }
+            }
+        }
+        #updateModal{
+            @extend #deleteModal;
+             
+            .modal-body{
+                input, select {
+                    border: solid 1.5px $lightBlue;
+                    color: $blue;
+                }
+            }
+            .modal-footer{
+                background-color: $yellow;
+                .btn-primary{
+                    background-color: $blue;
+                    color: white;
+                }
+            }
+
+        }
+
     }
 
 

@@ -25,7 +25,12 @@ async function login(req,res){
     const findByEmail = users.find(user => user.email === email);
     const findProfile = await User.find( {email: email});
     const profile = findProfile[0].profile;
+    const idUser = findProfile[0]._id;
 
+    const user = {
+        profile: profile,
+        id: idUser
+    }
 
     //Si el email = undefined quiere decir que no existe tal usuario
     if(findByEmail == undefined){
@@ -49,7 +54,7 @@ async function login(req,res){
                 // Creo el Token
                 const accessToken = jwt.sign(infoUser,jwtSign);
 
-                let resp = new response(false,202,profile,accessToken);
+                let resp = new response(false,202,user,accessToken);
                 res.send(resp);
 
             }else{

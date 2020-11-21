@@ -2,6 +2,7 @@ const response = require('../responses/response');
 //Models
 const { citySchema, countrySchema, regionSchema } = require('../models/Regions');
 const {nameJoi} = require('../validations/joiValidations');
+const {idJoi} = require('../validations/joiValidations');
 
 class Regions{
 

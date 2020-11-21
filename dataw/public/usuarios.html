@@ -33,13 +33,13 @@
                     <a href="">Contactos</a>
                 </li>
                 <li class="nav-li">
-                    <a href="./usuarios.html" id="usuariosLi">Usuarios</a>
+                    <a href="./usuarios.html" class="linkActive">Usuarios</a>
                 </li>
                 <li class="nav-li">
                     <a href="#">Compañías</a>
                 </li>
                 <li class="nav-li">
-                    <a href="#">Región/Ciudad</a>
+                    <a href="./regiones.html">Región/Ciudad</a>
                 </li>
             </ul>
             <div>
@@ -101,11 +101,8 @@
             
         </section>
 
-
-
         <section class="second">
             <a href="#nav" id="second"><i class="fas fa-arrow-up"></i></a>
-
             <div class="users-container">
                 <i class="fas fa-rainbow"></i>
                 <h1 class="title-lista">Lista de Usuarios</h1>
@@ -117,20 +114,66 @@
                     <div class="field">Edit/Delete</div>
                 </div>
                 <div class="users-table" id="users-table">
-
-                    <!-- <div class="user-row">
-                        <div class="user-info">German</div>
-                        <div class="user-info">Saracca</div>
-                        <div class="user-info">serigrafiatasd@gmail.com</div>
-                        <div class="user-info">Admin</div>
-                        <div class="user-edit">
-                            <i class="fas fa-user-edit" ></i>
-                            <i class="fas fa-trash-alt" ></i>
-                        </div>
-                    </div> -->
+                    <!--Contenido creado desde JS-->
                 </div>
             </div>
+            <!--Modal de update de usuario-->
+            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">ACTUALIZAR USUARIO</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group" >
+                                <input type="text" class="form-control" id="update_name" name="name" placeholder="Name" required>
+                            </div> 
+                            <div class="form-group" >    
+                                <input type="text" class="form-control" id="update_lastname" name="lastname" placeholder="Lastname" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="update_email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="profile" id="update_profile" placeholder= "asd">
+                                    <option value="Admin" selected>Admin</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="updateOk">Actualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de confirmacion de borrado de usuario -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">ELIMINAR USUARIO</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" ></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="deleteOk">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </section>
+        
+
 
 
 

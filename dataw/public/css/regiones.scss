@@ -1,0 +1,212 @@
+@import 'colors.scss';
+@import 'fonts.scss';
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: $font;
+}
+
+//Estilo de botones
+@mixin button($color,$bckColor){
+
+    color: $color;
+    background-color: $bckColor;
+    border: none;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    &:hover{
+        color: $color;
+        background-color: $lightBlue;
+    }
+}
+
+body{
+
+    .navbar{
+        display: flex;
+        align-content: center;
+        background: $blue;
+        height: 10vh;
+        border-bottom: solid 6px $lightBlue;
+
+        .burger {
+            display: none;
+            
+            @media screen and (max-width: 1020px) {
+                display: unset;
+                color: white;
+                i{
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 40px;
+        }
+        #welcome {
+            color: $yellow;
+            margin-top: 2.5vh;
+        }
+
+        .rigth-nav{
+            display: flex;
+            align-items: center;
+            @media screen and (max-width: 1020px) {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin-top: 10vh;
+                width: 50%;
+                height: 90vh;
+                background-color: $blue;
+                border-left: solid 3px $lightBlue ;
+            }
+
+            .nav-ul{
+
+                display: flex;
+                justify-content: space-between;
+                width: 50vw;
+                margin-top: 2.5vh;
+                margin-right:4vw;
+                list-style: none;
+
+                .linkActive{
+                    color: $yellow;
+                }
+
+                @media screen and (max-width: 1020px) {
+
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    height: 30%;
+                    margin-top: 10vh;
+                    margin-bottom: 10vh;
+                    margin-right:0;
+                    
+                }
+
+                a{
+                    text-decoration: none;
+                    color: white;
+
+                    &:hover{
+                        color: $yellow;
+                        transition: 0.25s ease-in;
+                    }
+                }
+            }
+
+            .btn{
+                @include button($yellow,$blue);
+                text-transform: none;
+                border: solid 1px $yellow;
+            }
+        }
+    }
+
+    main {
+        background-color: $yellow;
+        min-height: 90vh;
+
+        .tree-container{
+            display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            padding-top: 30px;
+            height: auto;
+
+            .big-container{
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-start;
+                width: 95%;
+                min-height: 80vh;
+                background-color: $blue;
+                border-radius: 5px;
+                padding: 10px;
+                
+                .hidden{
+                    display: none;
+                }
+                .ul-region{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    min-width: 25vw;
+                    border-radius: 5px;
+                    .region-div{
+                        display: flex;
+                        align-items: center;
+                        height: fit-content;
+                        width: fit-content;
+
+                        i { 
+                            color: white;
+                            margin: 8px;
+                            cursor: pointer;
+                            &:hover{
+                                transform: scale(1.5);
+                            }
+                        }
+                    }
+
+                    p{  
+                        background-color: $orange;
+                        cursor: pointer;
+                        margin: 10px;
+                        padding: 2.5px 10px;
+                        border-radius: 5px;
+                        width: fit-content;
+                    }
+
+                    .ul-country{
+                        
+                        color: $blue;
+                        text-align: center;
+                        border-radius: 5px;
+                        
+                        .country-div{
+                            @extend .region-div;
+                        }
+
+                        p{
+                            background-color: $lightBlue;
+                            padding: 2.5px 10px;
+                            margin-left: 40px;
+                            border-radius: 5px;
+                            width: fit-content;
+                            cursor: pointer;
+                        }
+
+                        .li-city{
+                            background-color: white;
+                            color: $blue;
+                            list-style: none;
+                            padding: 2.5px 10px ;
+                            margin: 10px 0px 5px 70px;
+                            width: fit-content;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            
+                            
+                            i{
+                                margin-left: 15px;
+                                &:hover{
+                                    transform: scale(1.5);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}    

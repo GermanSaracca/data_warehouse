@@ -1,9 +1,6 @@
 //Elementos
 const token = JSON.parse(localStorage.getItem('token'));
-
-
-const usuariosLi = document.getElementById('usuariosLi');
-usuariosLi.style.color = '#E9C46A';
+const idUser = JSON.parse(localStorage.getItem('id'));
 
 const name = document.getElementById('name');
 const lastname = document.getElementById('lastname');
@@ -11,6 +8,12 @@ const email = document.getElementById('email');
 const profile = document.getElementById('profile');
 const firstPassword = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
+
+const updateName = document.getElementById('update_name');
+const updateLastname = document.getElementById('update_lastname');
+const updateEmail = document.getElementById('update_email');
+const updateProfile = document.getElementById('update_profile');
+
 
 const eye = document.getElementById('eye');
 const errorsMessage = document.getElementById('errors');
@@ -20,9 +23,14 @@ const butonSubmit = document.getElementById('btnSubmit');
 const helpPassword = document.getElementById('helpPassword')
 helpPassword.style.display = 'none';
 
-const userEdit = document.getElementsByClassName('fa-user-edit');
-const userDelete = document.getElementsByClassName('fa-trash-alt');
 const usersTable = document.getElementById('users-table');
+//Modal de borrado de usuario
+const deleteBody = document.getElementById('deleteBody');
+const submitDelete = document.getElementById('deleteOk');
+//Modal de update de usuario
+const modalBody = document.getElementsByClassName('modal-body');
+const submitUpdate = document.getElementById('updateOk');
+
 
 //Variable Global
 import { basepathClient, basepathServer } from './globals.js';
@@ -31,17 +39,22 @@ import { basepathClient, basepathServer } from './globals.js';
 //Event Listeners
 document.addEventListener('DOMContentLoaded',checkIfAdmin);//Chequea si quien quiere acceder a esta seccion es Admin o Usuario
 document.addEventListener('DOMContentLoaded',getUsers);
+
 eye.addEventListener('click',visiblePass);
 firstPassword.addEventListener('focus',()=>{helpPassword.style.display = 'unset' });
 firstPassword.addEventListener('blur',()=>{helpPassword.style.display = 'none' });
 confirmPassword.addEventListener('keyup',passwordConfirm);
 butonSubmit.addEventListener('click',registerUser);
+submitUpdate.addEventListener('click',updateUser);
+submitDelete.addEventListener('click',deleteUser);
+
 
 //Funciones
+
 //Obtener todos los usuarios
 async function getUsers(params) {
     
-    let fetchUsers = await fetch(`${basepathServer}getUsers`, {
+    let fetchUsers = await fetch(`${basepathServer}getUsers/${idUser}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -68,10 +81,8 @@ async function getUsers(params) {
 //Registrar usuario nuevo
 async function registerUser(event) {
     
-    // Prevent form to submit
+    // Previene form de submit
     event.preventDefault();
-
-    
 
     let newUser = {
         name: name.value,
@@ -97,16 +108,13 @@ async function registerUser(event) {
 
     //Si existe error dentro de la validacion de joi en servidor
     if(data.details){
-
         errorsMessage.innerText = data.details[0].message;
 
-        //Si no existe en base de datos  
+    //Si no existe en base de datos  
     } else if(data.codigo == 403){
 
         errorsMessage.innerText = data.mensaje;
-
     }
-
     //Alerta de usuario creado y reseteo de formulario
     if(data.codigo == 202){
 
@@ -117,7 +125,70 @@ async function registerUser(event) {
         firstPassword.value = '';
         confirmPassword.value = '';
         errorsMessage.innerText = '';
-        getUsers();
+        
+    }
+}
+//Eliminar usuario
+async function deleteUser(event){
+
+    //Recupero el id del usuario a actualizar que fue previamente aplicado
+    // al atributo id del modal donde se va a borrar
+    let id = event.currentTarget.parentNode.parentNode.children[1].id ;
+
+    let fetchDelete = await fetch(`${basepathServer}deleteUser/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    let data = await fetchDelete.json();
+    console.log(data);
+
+    if(!data.error){
+
+        window.location.reload();
+        
+    }else{
+        alert(data.error);
+    }
+}
+
+async function updateUser(event) {
+
+    //Recupero el id del usuario a actualizar que fue previamente aplicado
+    // al atributo id del modal donde se va a actualizar
+    let id = event.currentTarget.parentNode.parentNode.children[1].id ;
+
+    let updateUser = {
+        name: updateName.value,
+        lastname: updateLastname.value,
+        email: updateEmail.value,
+        profile: updateProfile.value
+
+    };
+    console.log(updateUser);
+
+    let fetchUpdate = await fetch(`${basepathServer}updateUser/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(updateUser)
+    });
+    
+    let data = await fetchUpdate.json();
+    console.log(data);
+
+    if(!data.error){
+
+        window.location.reload();
+        
+    }else{
+
+        alert(data.error)
     }
 }
 
@@ -132,6 +203,7 @@ function visiblePass() {
         firstPassword.type = "password";
     }
 };
+
 // Confirm password
 function passwordConfirm(){
 
@@ -144,12 +216,13 @@ function passwordConfirm(){
         butonSubmit.removeAttribute('disabled');
     }
 }
+//Chequea si quien quiere entra a esta seccion tiene los privilegios de administrador
 function checkIfAdmin() {
 
     //Recupero info del local que me dice si es admin o user
     const profile = JSON.parse(localStorage.getItem('profile'));
 
-    //Si no es User lo mando de vuelta a la home
+    //Si es User lo mando de vuelta a la home
     if(profile == 'User'){
 
         window.location.href = `${basepathClient}home.html`;
@@ -165,8 +238,6 @@ function infoUsersByClick(event){
     let profile = event.currentTarget.parentNode.parentNode.children[3].innerText;
     let id = event.currentTarget.parentNode.parentNode.id;
     
-
-
     let user = {
         name: name,
         lastname: lastname,
@@ -174,6 +245,7 @@ function infoUsersByClick(event){
         profile: profile,
         id: id
     }
+
     return user;
 }
 
@@ -197,6 +269,10 @@ function createUserRow(a,b,c,d,e){
     divEdits.className = 'user-edit';
     iEdit.className = 'fas fa-user-edit';
     iDelete.className = 'fas fa-trash-alt';
+    iDelete.setAttribute('data-target','#deleteModal');
+    iDelete.setAttribute('data-toggle','modal');
+    iEdit.setAttribute('data-target','#updateModal');
+    iEdit.setAttribute('data-toggle','modal');
 
     div1.innerText = a;
     div2.innerText = b;
@@ -214,42 +290,32 @@ function createUserRow(a,b,c,d,e){
 
     iEdit.addEventListener('click',(event)=>{
 
-        let user = infoUsersByClick(event);
-        console.log(user)
+        let {name,lastname,email,profile,id} = infoUsersByClick(event);
+        
+        //Paso todos los datos del usuario al modal donde se va a actualizar
+        updateName.value = name;
+        updateLastname.value = lastname;
+        updateEmail.value = email;
+        updateProfile.value = profile;
+
+        // Le paso el id al atributo id del modal donde 
+        // se va a realizar la accion de eliminar al usuario
+        modalBody[0].id = id;
+
     });
 
     iDelete.addEventListener('click',(event)=>{
 
         //Obtengo los datos del usuario clickeado para borrar
         let {name,lastname,id} = infoUsersByClick(event);
-        //Le pido confirmacion al administrador
-        let alert = confirm(`Esta seguro que desea eliminar al usuario ${name} ${lastname}?`);
-        
-        if(alert){
-            deleteUser(id);
-        }
-        
+
+        // Le paso el id al atributo id del modal donde 
+        // se va a realizar la accion de eliminar al usuario
+        modalBody[1].id = id;
+
+        modalBody[1].innerText = `Esta seguro que desea eliminar a ${name} ${lastname}?`;
+
     });
 
 };
 
-async function deleteUser(id){
-
-    let fetchDelete = await fetch(`${basepathServer}deleteUser/${id}`, {
-    method: 'DELETE',
-    headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-    }
-    });
-
-    let data = await fetchDelete.json();
-    console.log(data);
-    if(!data.error){
-
-        alert(data.mensaje);
-        window.location.reload();
-    }else{
-        alert(e);
-    }
-}

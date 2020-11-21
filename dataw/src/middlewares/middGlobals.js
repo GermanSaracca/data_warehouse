@@ -8,7 +8,7 @@ const express = require('express');
 //Luego se cambiara, ahora lo dejo asi para poder hacer pruebas.
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 min
-    max: 100, // maximo 100 request
+    max: 1000, // maximo 100 request
     message: "Se supero el limite de requests/hora"
 });
 
