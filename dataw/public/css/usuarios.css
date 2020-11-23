@@ -395,6 +395,7 @@ body .second .users-container .users-table::-webkit-scrollbar {
 
 body .second .users-container .users-table::-webkit-scrollbar-thumb {
   background-color: #2A9D8F;
+  border-radius: 3px;
 }
 
 body .second .users-container .users-table .user-row {

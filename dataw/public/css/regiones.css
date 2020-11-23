@@ -137,27 +137,107 @@ body main .tree-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin: 0 auto;
-  padding-top: 30px;
+  padding-top: 2vh;
   height: auto;
+}
+
+body main .tree-container .info-tree {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body main .tree-container .info-tree .form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: space-around;
+  margin-left: 2.5vw;
+  width: 30%;
+}
+
+body main .tree-container .info-tree .form-group input {
+  border: solid 2px #2A9D8F;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+body main .tree-container .info-tree .form-group .btn-primary {
+  color: white;
+  background-color: #0B222C;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+body main .tree-container .info-tree .form-group .btn-primary:hover {
+  color: white;
+  background-color: #2A9D8F;
+}
+
+body main .tree-container .info-tree .info {
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+}
+
+body main .tree-container .info-tree .info p {
+  font-weight: 400;
+  color: white;
+  background-color: #2A9D8F;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 12px;
 }
 
 body main .tree-container .big-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  margin-left: 2.5vw;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
   width: 95%;
-  min-height: 80vh;
   background-color: #0B222C;
   border-radius: 5px;
   padding: 10px;
+  min-height: 68vh;
+  max-height: 68vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  scroll-padding: 50px 0 0 50px;
+}
+
+body main .tree-container .big-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+body main .tree-container .big-container::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+body main .tree-container .big-container::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #2A9D8F;
+}
+
+body main .tree-container .big-container::-webkit-scrollbar-corner {
+  background-color: #0B222C;
+  border-radius: 5px;
 }
 
 body main .tree-container .big-container .hidden {
@@ -213,6 +293,14 @@ body main .tree-container .big-container .ul-region p {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-width: 175px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body main .tree-container .big-container .ul-region p:hover {
+  white-space: unset;
 }
 
 body main .tree-container .big-container .ul-region .ul-country {
@@ -252,5 +340,67 @@ body main .tree-container .big-container .ul-region .ul-country .li-city i {
 body main .tree-container .big-container .ul-region .ul-country .li-city i:hover {
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
+}
+
+body main .tree-container .tree-alert {
+  position: absolute;
+  top: 12vh;
+  left: 0vw;
+  height: auto;
+  padding: 20px;
+  background-color: #a30808;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+body main #deleteModal .modal-header, body main #updateModal .modal-header, body main #createModal .modal-header {
+  background-color: #F9DB6D;
+  color: #0B222C;
+}
+
+body main #deleteModal .modal-body input, body main #updateModal .modal-body input, body main #createModal .modal-body input {
+  outline: none;
+  border: solid 2px #2A9D8F;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+body main #deleteModal .modal-footer .btn-secondary, body main #updateModal .modal-footer .btn-secondary, body main #createModal .modal-footer .btn-secondary {
+  color: white;
+  background-color: #1cca1c;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-transform: none;
+}
+
+body main #deleteModal .modal-footer .btn-secondary:hover, body main #updateModal .modal-footer .btn-secondary:hover, body main #createModal .modal-footer .btn-secondary:hover {
+  color: white;
+  background-color: #2A9D8F;
+}
+
+body main #deleteModal .modal-footer .btn-secondary:hover, body main #updateModal .modal-footer .btn-secondary:hover, body main #createModal .modal-footer .btn-secondary:hover {
+  color: white;
+  background-color: #0e910e;
+}
+
+body main #deleteModal .modal-footer .btn-primary, body main #updateModal .modal-footer .btn-primary, body main #createModal .modal-footer .btn-primary {
+  color: #0B222C;
+  background-color: #F9DB6D;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-transform: none;
+}
+
+body main #deleteModal .modal-footer .btn-primary:hover, body main #updateModal .modal-footer .btn-primary:hover, body main #createModal .modal-footer .btn-primary:hover {
+  color: #0B222C;
+  background-color: #2A9D8F;
+}
+
+body main #deleteModal .modal-footer .btn-primary:hover, body main #updateModal .modal-footer .btn-primary:hover, body main #createModal .modal-footer .btn-primary:hover {
+  color: white;
+  background-color: #af2007;
 }
 /*# sourceMappingURL=regiones.css.map */

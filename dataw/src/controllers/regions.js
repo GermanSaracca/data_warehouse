@@ -14,7 +14,7 @@ class Regions{
         try{
 
             let { error } = nameJoi.validate(region);
-            if(error) throw error;
+            if(error) throw "nombre de region invalido";
 
             const newRegion = new regionSchema(region);
             const { _id } = await newRegion.save();
@@ -25,7 +25,7 @@ class Regions{
         }catch(e){
 
 
-            let resp = new response(true,400,'Ya existe una region con ese nombre',e);
+            let resp = new response(true,400,e);
             res.send(resp);
            
         }
@@ -55,11 +55,11 @@ class Regions{
             //Por ultimo elimino la region
             let deletedRegion = await regionSchema.findByIdAndDelete(idRegion);
 
-            let resp = new response(202,"Region eliminada correctamente", deletedRegion);
+            let resp = new response(false,202,"Region eliminada correctamente", deletedRegion);
             res.send(resp);
 
         }catch(e){
-            let resp = new response(202,"No se pudo eliminar Region correctamente",e );
+            let resp = new response(true,400,"No se pudo eliminar Region correctamente",e );
             res.send(resp);
         }
     };

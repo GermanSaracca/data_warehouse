@@ -118,20 +118,78 @@ body{
 
         .tree-container{
             display: flex;
+            flex-direction: column;
             justify-content: space-around;
             margin: 0 auto;
-            padding-top: 30px;
+            padding-top: 2vh;
             height: auto;
+
+            .info-tree{
+                display: flex;
+                align-items: center;
+
+                .form-group{
+                    display: flex;
+                    flex-direction: column;
+                    justify-items: space-around;
+                    margin-left: 2.5vw;
+                    width: 30%;
+
+
+                    input{
+                        border: solid 2px $lightBlue;
+                        border-radius: 5px;
+                        margin-bottom: 15px;
+                    }
+                    .btn-primary{
+                        @include button(white,$blue);
+                    }
+                }
+                .info{
+                    margin-left: 2.5vw;
+                    margin-right: 2.5vw;
+
+                    p{
+
+                        font-weight: 400;
+                        color: white;
+                        background-color: $lightBlue;
+                        border-radius: 5px;
+                        padding: 10px;
+                        font-size: 12px;
+
+                    }
+                }
+            }
 
             .big-container{
                 display: flex;
-                justify-content: space-around;
+                margin-left: 2.5vw;
                 align-items: flex-start;
                 width: 95%;
-                min-height: 80vh;
                 background-color: $blue;
                 border-radius: 5px;
                 padding: 10px;
+                min-height: 68vh;
+                max-height: 68vh;
+                overflow-y: auto;
+                overflow-x: auto;
+                scroll-padding: 50px 0 0 50px;
+
+                &::-webkit-scrollbar{
+                    width: 10px;
+                }
+                &::-webkit-scrollbar:horizontal{
+                    height: 10px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 3px;
+                    background-color: $lightBlue;
+                }
+                &::-webkit-scrollbar-corner {
+                    background-color: $blue;
+                    border-radius: 5px;
+                }
                 
                 .hidden{
                     display: none;
@@ -142,11 +200,14 @@ body{
                     justify-content: space-around;
                     min-width: 25vw;
                     border-radius: 5px;
+                    
+
                     .region-div{
                         display: flex;
                         align-items: center;
                         height: fit-content;
                         width: fit-content;
+
 
                         i { 
                             color: white;
@@ -165,6 +226,16 @@ body{
                         padding: 2.5px 10px;
                         border-radius: 5px;
                         width: fit-content;
+                        max-width: 175px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis; 
+
+                        &:hover{
+                            white-space: unset;
+
+                        }
+
                     }
 
                     .ul-country{
@@ -204,6 +275,50 @@ body{
                                 }
                             }
                         }
+                    }
+                }
+            }
+            .tree-alert {
+                position: absolute;
+                top: 12vh;
+                left: 0vw;
+                height: auto;
+                padding: 20px;
+                background-color: rgb(163, 8, 8);
+                color: white;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+        #deleteModal, #updateModal, #createModal{
+
+            .modal-header {
+                background-color: $yellow;
+                color: $blue;
+            }
+            .modal-body{
+                input{
+                    outline: none;
+                    border: solid 2px $lightBlue;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+            }
+            .modal-footer {
+                .btn-secondary{
+                    @include button(white,rgb(28, 202, 28));
+                    text-transform: none;
+                    &:hover{
+                        color: white;
+                        background-color: rgb(14, 145, 14);
+                    }
+                }
+                .btn-primary{
+                    @include button($blue,$yellow);
+                    text-transform: none;
+                    &:hover{
+                        color: white;
+                        background-color: rgb(175, 32, 7);
                     }
                 }
             }

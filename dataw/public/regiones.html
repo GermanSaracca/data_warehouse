@@ -49,74 +49,92 @@
     </nav>
     <main>
         <div class="tree-container">
-            <ul class="big-container" id="big-container">
-            <!-- <ul class="ul-region" title="Sudamerica">
-                    <div class="region-div" id="sudamerica">
-                        <p>Sudamerica</p>
-                        <i class="fas fa-trash-alt"></i>
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    <ul class="ul-country" title="Argentina">
-                        <div class="country-div" id="Argentina">
-                            <p>Argentina</p>
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </div>
-                        <div class="city-div">
-                            <li class="li-city">
-                                Tandil
-                                <i class="fas fa-trash-alt"></i>
-                                <i class="fas fa-edit"></i>
-                            </li>
-                        </div>
+            <div class="info-tree">
+                <div class="form-group" >
+                    <input id="inputRegion" type="text" class="form-control"  placeholder="Ingrese nueva Región">
+                    <button id="submitRegion" type="submit" class="btn btn-primary" >Crear Región</button>
+                </div>
+                <div class="info">
+                    <p>Aquí podrás crear, editar y eliminar regiones, paises y ciudades.
+                    Comienza creando una Región y luego sus paises y ciudades de cada país.<br>
+                    Ten en cuenta que luego utilizaras estas ciudades para cargar nuevas compañias y contactos.<br>
+                    Clickea cada región y/o país para minimizar la rama.</p>
+                </div> 
+            </div>
 
-                        <li class="li-city">
-                            Rauch
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                        <li class="li-city">
-                            Mar del Plata
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                        <li class="li-city">
-                            Cordoba
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                        <li class="li-city">
-                            Bahia Blanca
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                    </ul>
-                    <ul class="ul-country" title="Brasil">
-                        <div class="country-div" id="Brasil">
-                            <p>Brasil</p>
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </div>
-                        <li class="li-city">
-                            Porto Alegre
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                        <li class="li-city">
-                            Rio de Janeiro
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                        <li class="li-city">
-                            Sao Paulo
-                            <i class="fas fa-trash-alt"></i>
-                            <i class="fas fa-edit"></i>
-                        </li>
-                    </ul>
-                </ul> -->
+            <!-- Contenedor padre de las regiones creadas dinamicamente -->
+            <ul class="big-container" id="big-container"></ul>
 
-            </ul>
+            <!--Alert para error de ingreso de datos en arbol-->
+            <div class="tree-alert" id="tree-alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <p id="tree-alert-text"></p>
+            </div>
         </div>
+
+        <!-- Modal de confirmacion de borrado-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-primary" id="deleteOk">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de actualizacion-->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="update-modal-body">
+                        <input id="update-text" type="text" placeholder="Ingrese nuevo nombre">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-primary" id="updateOk">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal de creacion de nuevo pais o ciudad-->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createModalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="create-modal-body">
+                        <input id="create-text" type="text" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                        <button type="button" class="btn btn-primary" id="createOk">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
 
     </main>
