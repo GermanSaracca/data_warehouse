@@ -29,7 +29,7 @@ body{
     .navbar{
         display: flex;
         align-content: center;
-        background: $blue;
+        background: $black;
         height: 10vh;
         border-bottom: solid 5px $lightBlue;
 
@@ -65,7 +65,7 @@ body{
                 margin-top: 10vh;
                 width: 50%;
                 height: 90vh;
-                background-color: $blue;
+                background-color: $black;
                 border-left: solid 3px $lightBlue ;
             }
 
@@ -101,7 +101,7 @@ body{
             }
 
             .btn{
-                @include button($yellow,$blue);
+                @include button($yellow,$black);
                 text-transform: none;
                 border: solid 1px $yellow;
             }
@@ -113,8 +113,8 @@ body{
         align-items: center;
         margin-top: 10vh;
         color: white;
-        background: $blue;
-        border: solid 5px $blue;
+        background: $black;
+        border: solid 5px $black;
         border-radius: 10px;
         width: 70vw;
         height: 70vh;
@@ -138,8 +138,7 @@ body{
         &::-webkit-scrollbar-track {
             border: 14px solid white;
             border-radius: 53px;
-            
-          }
+        }
 
         .informacion{
             margin-top: auto;

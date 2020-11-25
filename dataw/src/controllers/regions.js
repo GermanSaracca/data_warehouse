@@ -39,7 +39,7 @@ class Regions{
             //Busco la region a remover y traigo sus countries hijos
             let {countries} = await regionSchema.findOne(idRegion);
             console.log(countries);
-            
+
             countries.forEach( async (element) => {
                 //Encuentro id´s de ciudades de cada pais dentro de la region
                 let {cities} = await countrySchema.findById( element );
@@ -97,7 +97,6 @@ class Regions{
                     }
                 }
             );
-            console.log(regions);
 
             let resp = new response(false,200,"Lista de Regiones completa", regions)
             res.send(resp);

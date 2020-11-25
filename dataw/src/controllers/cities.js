@@ -91,6 +91,23 @@ class Cities{
         }
     };
 
+    async getCities(req,res){
+
+        try{
+
+            let cities = await citySchema.find({},{__v:0, _id: 0});
+
+
+            let resp = new response(false,200,"Lista de Ciudades completa", cities)
+            res.send(resp);
+
+        }catch(e){
+
+            let resp = new response(true,400,e)
+            res.send(resp);
+        }
+    }
+
 
 }
 

@@ -28,7 +28,7 @@ body {
     background-color: $yellow;
 
     .navbar {
-        background: $blue;
+        background: $black;
         height: 10vh;
         border-bottom: solid 6px $lightBlue;
 
@@ -44,7 +44,7 @@ body {
         flex-direction: column;
         align-items: center;
         padding: 3vh;
-        border: solid 5px $blue;
+        border: solid 5px $black;
         border-radius: 10px;
         background-color: white;
         width: 30vw;
@@ -54,7 +54,7 @@ body {
         a{
             font-weight: 500;
             margin-top: 20px;
-            color: $blue;
+            color: $black;
         }
     
         .errorsContainer{
@@ -78,7 +78,7 @@ body {
 
             label{
                 font-weight: 500;
-                color: $blue;
+                color: $black;
             }
             input {
                 border: solid 2px $lightBlue;
@@ -88,7 +88,7 @@ body {
             }
 
             .btn {
-                @include button(white,$blue);
+                @include button(white,$black);
                 width: 100%;
                 display: block;
                 margin: auto;

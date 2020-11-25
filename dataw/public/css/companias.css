@@ -128,12 +128,12 @@ body .navbar .rigth-nav .btn:hover {
   background-color: #247BA0;
 }
 
-body .first {
+body main .create-company {
   background-color: #C2E812;
   height: 90vh;
 }
 
-body .first .container {
+body main .create-company .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,13 +154,13 @@ body .first .container {
   margin-bottom: 15px;
 }
 
-body .first .container a {
+body main .create-company .container a {
   font-weight: 500;
   margin-top: 20px;
   color: #111010;
 }
 
-body .first .container .errorsContainer {
+body main .create-company .container .errorsContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -169,20 +169,20 @@ body .first .container .errorsContainer {
           justify-content: center;
 }
 
-body .first .container .errorsContainer small {
+body main .create-company .container .errorsContainer small {
   color: red;
   font-weight: 700;
 }
 
-body .first .container h1 {
+body main .create-company .container h1 {
   font-weight: 500;
 }
 
-body .first .container .fa-rainbow {
+body main .create-company .container .fa-rainbow {
   font-size: 40px;
 }
 
-body .first .container .loginForm {
+body main .create-company .container .loginForm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -193,44 +193,29 @@ body .first .container .loginForm {
   width: 95%;
 }
 
-body .first .container .loginForm label {
+body main .create-company .container .loginForm label {
   font-weight: 500;
   color: #111010;
 }
 
-body .first .container .loginForm input {
+body main .create-company .container .loginForm input {
   border: solid 2px #247BA0;
   color: #111010;
 }
 
-body .first .container .loginForm select {
+body main .create-company .container .loginForm .dropdown-toggle {
   border: solid 2px #247BA0;
-  color: #111010;
 }
 
-body .first .container .loginForm .text-muted {
-  display: none;
+body main .create-company .container .loginForm .dropdown-menu {
+  border: solid 4px #C2E812;
 }
 
-body .first .container .loginForm .password-visibility {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+body main .create-company .container .loginForm .inner {
+  border: none;
 }
 
-body .first .container .loginForm .password-visibility .fa-eye-slash {
-  margin: 10px 0 0 -30px;
-  color: #111010;
-  cursor: pointer;
-}
-
-body .first .container .loginForm .password-visibility .fa-eye {
-  margin: 10px 0 0 -30px;
-  color: #111010;
-  cursor: pointer;
-}
-
-body .first .container .loginForm .btn {
+body main .create-company .container .loginForm #btnSubmit {
   color: white;
   background-color: #111010;
   border: none;
@@ -241,12 +226,12 @@ body .first .container .loginForm .btn {
   margin-top: 10px;
 }
 
-body .first .container .loginForm .btn:hover {
+body main .create-company .container .loginForm #btnSubmit:hover {
   color: white;
   background-color: #247BA0;
 }
 
-body .first .alert, body .first .center-alert .alertCreation {
+body main .create-company .alert, body main .create-company .center-alert .alertCreation {
   padding: 20px;
   background-color: #247BA0;
   color: white;
@@ -257,7 +242,7 @@ body .first .alert, body .first .center-alert .alertCreation {
   position: absolute;
 }
 
-body .first .alert .closebtn, body .first .center-alert .alertCreation .closebtn {
+body main .create-company .alert .closebtn, body main .create-company .center-alert .alertCreation .closebtn {
   margin-left: 15px;
   color: white;
   font-weight: bold;
@@ -269,11 +254,11 @@ body .first .alert .closebtn, body .first .center-alert .alertCreation .closebtn
   transition: 0.3s;
 }
 
-body .first .alert .closebtn:hover, body .first .center-alert .alertCreation .closebtn:hover {
+body main .create-company .alert .closebtn:hover, body main .create-company .center-alert .alertCreation .closebtn:hover {
   color: #111010;
 }
 
-body .first .center-alert {
+body main .create-company .center-alert {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -282,7 +267,7 @@ body .first .center-alert {
           justify-content: center;
 }
 
-body .first .center-alert .alertCreation {
+body main .create-company .center-alert .alertCreation {
   font-size: 24px;
   background-color: green;
   width: 22vw;
@@ -295,34 +280,34 @@ body .first .center-alert .alertCreation {
   text-align: center;
 }
 
-body .first .fa-arrow-down:nth-child(1) {
+body main .create-company .fa-arrow-down:nth-child(1) {
   font-size: 40px;
   color: #111010;
-  -webkit-transform: translate(20px, -20px);
-          transform: translate(20px, -20px);
-}
-
-body .first .fa-arrow-down:nth-child(1):hover {
-  color: #247BA0;
-}
-
-body .second {
-  background-color: #247BA0;
-  border-top: solid 6px #111010;
-}
-
-body .second .fa-arrow-up {
-  font-size: 40px;
-  color: white;
   -webkit-transform: translate(20px, 20px);
           transform: translate(20px, 20px);
 }
 
-body .second .fa-arrow-up:hover {
+body main .create-company .fa-arrow-down:nth-child(1):hover {
+  color: #247BA0;
+}
+
+body main .companies {
+  background-color: #247BA0;
+  border-top: solid 6px #111010;
+}
+
+body main .companies .fa-arrow-up {
+  font-size: 40px;
+  color: white;
+  -webkit-transform: translate(20px, 30px);
+          transform: translate(20px, 30px);
+}
+
+body main .companies .fa-arrow-up:hover {
   color: #111010;
 }
 
-body .second .users-container {
+body main .companies .companies-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -334,26 +319,26 @@ body .second .users-container {
       -ms-flex-align: center;
           align-items: center;
   height: 95vh;
+  padding-top: 3vh;
 }
 
-body .second .users-container .title-lista {
-  margin-top: 10px;
+body main .companies .companies-container .table-title {
   margin-bottom: 25px;
   color: white;
 }
 
-body .second .users-container .fa-rainbow {
+body main .companies .companies-container .fa-rainbow {
   color: white;
   font-size: 40px;
 }
 
-body .second .users-container .table-fields {
+body main .companies .companies-container .table-fields {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: .8fr .8fr 1.6fr .6fr 1fr;
-      grid-template-columns: .8fr .8fr 1.6fr .6fr 1fr;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 40px;
-  width: 70vw;
+  width: 90vw;
   background-color: #C2E812;
   color: #111010;
   border-top-left-radius: 10px;
@@ -362,7 +347,7 @@ body .second .users-container .table-fields {
   border-bottom: solid 1px #111010;
 }
 
-body .second .users-container .table-fields .field {
+body main .companies .companies-container .table-fields .field {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -372,52 +357,52 @@ body .second .users-container .table-fields .field {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-weight: bold;
+  font-weight: 400;
 }
 
-body .second .users-container .users-table {
+body main .companies .companies-container .companies-table {
   padding: 3px 3px 10px 3px;
   border: solid 4px #111010;
   border-top: solid 1px #111010;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   background-color: white;
-  width: 70vw;
+  width: 90vw;
   max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
   scroll-padding: 50px 0 0 50px;
 }
 
-body .second .users-container .users-table::-webkit-scrollbar {
+body main .companies .companies-container .companies-table::-webkit-scrollbar {
   width: 7px;
 }
 
-body .second .users-container .users-table::-webkit-scrollbar-thumb {
+body main .companies .companies-container .companies-table::-webkit-scrollbar-thumb {
   background-color: #247BA0;
   border-radius: 3px;
 }
 
-body .second .users-container .users-table .user-row {
+body main .companies .companies-container .companies-table .company-row {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: .8fr .8fr 1.6fr .6fr 1fr;
-      grid-template-columns: .8fr .8fr 1.6fr .6fr 1fr;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 40px;
-  width: 70vw;
+  width: 90vw;
   background-color: white;
   border-bottom: 1px solid #c4c0c0;
   border-radius: unset;
   margin-left: -5px;
 }
 
-body .second .users-container .users-table .user-row:hover {
+body main .companies .companies-container .companies-table .company-row:hover {
   background-color: #247BA0;
   cursor: pointer;
   color: white;
 }
 
-body .second .users-container .users-table .user-row .user-info {
+body main .companies .companies-container .companies-table .company-row .company-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -429,7 +414,7 @@ body .second .users-container .users-table .user-row .user-info {
           align-items: center;
 }
 
-body .second .users-container .users-table .user-row .user-edit {
+body main .companies .companies-container .companies-table .company-row .company-edit {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -441,23 +426,23 @@ body .second .users-container .users-table .user-row .user-edit {
           align-items: center;
 }
 
-body .second .users-container .users-table .user-row .user-edit i {
+body main .companies .companies-container .companies-table .company-row .company-edit i {
   font-size: 24px;
   color: #111010;
 }
 
-body .second .users-container .users-table .user-row .user-edit i:hover {
+body main .companies .companies-container .companies-table .company-row .company-edit i:hover {
   color: white;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
 
-body .second #deleteModal .modal-header, body .second #updateModal .modal-header {
+body main .companies #deleteModal .modal-header, body main .companies #updateModal .modal-header {
   background-color: #C2E812;
   color: #111010;
 }
 
-body .second #deleteModal .modal-footer .btn-secondary, body .second #updateModal .modal-footer .btn-secondary {
+body main .companies #deleteModal .modal-footer .btn-secondary, body main .companies #updateModal .modal-footer .btn-secondary {
   color: #111010;
   background-color: #C2E812;
   border: none;
@@ -467,17 +452,17 @@ body .second #deleteModal .modal-footer .btn-secondary, body .second #updateModa
   text-transform: none;
 }
 
-body .second #deleteModal .modal-footer .btn-secondary:hover, body .second #updateModal .modal-footer .btn-secondary:hover {
+body main .companies #deleteModal .modal-footer .btn-secondary:hover, body main .companies #updateModal .modal-footer .btn-secondary:hover {
   color: #111010;
   background-color: #247BA0;
 }
 
-body .second #deleteModal .modal-footer .btn-secondary:hover, body .second #updateModal .modal-footer .btn-secondary:hover {
+body main .companies #deleteModal .modal-footer .btn-secondary:hover, body main .companies #updateModal .modal-footer .btn-secondary:hover {
   color: white;
   background-color: #111010;
 }
 
-body .second #deleteModal .modal-footer .btn-primary, body .second #updateModal .modal-footer .btn-primary {
+body main .companies #deleteModal .modal-footer .btn-primary, body main .companies #updateModal .modal-footer .btn-primary {
   color: #111010;
   background-color: #ff6f00;
   border: none;
@@ -488,27 +473,45 @@ body .second #deleteModal .modal-footer .btn-primary, body .second #updateModal 
   text-transform: none;
 }
 
-body .second #deleteModal .modal-footer .btn-primary:hover, body .second #updateModal .modal-footer .btn-primary:hover {
+body main .companies #deleteModal .modal-footer .btn-primary:hover, body main .companies #updateModal .modal-footer .btn-primary:hover {
   color: #111010;
   background-color: #247BA0;
 }
 
-body .second #deleteModal .modal-footer .btn-primary:hover, body .second #updateModal .modal-footer .btn-primary:hover {
+body main .companies #deleteModal .modal-footer .btn-primary:hover, body main .companies #updateModal .modal-footer .btn-primary:hover {
   color: white;
   background-color: red;
 }
 
-body .second #updateModal .modal-body input, body .second #updateModal .modal-body select {
+body main .companies #updateModal .modal-body input, body main .companies #updateModal .modal-body select {
   border: solid 1.5px #247BA0;
   color: #111010;
 }
 
-body .second #updateModal .modal-footer {
+body main .companies #updateModal .modal-body .dropdown-toggle {
+  border: solid 1.5px #247BA0;
+  color: #111010;
+}
+
+body main .companies #updateModal .modal-body .dropdown-menu {
+  border: solid 4px #C2E812;
+}
+
+body main .companies #updateModal .modal-body .inner {
+  border: none;
+}
+
+body main .companies #updateModal .modal-footer {
   background-color: #C2E812;
 }
 
-body .second #updateModal .modal-footer .btn-primary {
+body main .companies #updateModal .modal-footer .update-alert {
+  display: none;
+  color: red;
+}
+
+body main .companies #updateModal .modal-footer .btn-primary {
   background-color: #111010;
   color: white;
 }
-/*# sourceMappingURL=usuarios.css.map */
+/*# sourceMappingURL=companias.css.map */

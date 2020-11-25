@@ -30,10 +30,8 @@ const treeAlert = document.getElementById('tree-alert');
 const treeAlertText = document.getElementById('tree-alert-text');
 treeAlert.style.display = 'none';
 
-
 //Variable Global
 import { basepathClient, basepathServer } from './globals.js';
-
 
 //EventListeners
 document.addEventListener('DOMContentLoaded',getRegions);
@@ -41,8 +39,6 @@ submitDelete.addEventListener('click',deleteMe);
 submitUpdate.addEventListener('click',updateMe);
 submitCreate.addEventListener('click',createMe);
 submitRegion.addEventListener('click',createRegion);
-
-
 
 //Funciones
 
@@ -94,9 +90,13 @@ function createRegionUl(region){
 
         toggleSection(regionElements);
     });
+    let iEllipsis = document.createElement('i');
+    iEllipsis.className = 'fas fa-ellipsis-v';
+    
 
     let iDelete = document.createElement('i');
-    iDelete.className = 'fas fa-trash-alt';
+    iDelete.className = 'fas fa-trash-alt hidden';
+    iDelete.title = 'Borrar Región';
     iDelete.setAttribute('data-target','#deleteModal');
     iDelete.setAttribute('data-toggle','modal');
 
@@ -112,8 +112,8 @@ function createRegionUl(region){
     });
 
     let iEdit = document.createElement('i');
-    iEdit.className = 'fas fa-edit';
-
+    iEdit.className = 'fas fa-edit hidden';
+    iEdit.title = 'Editar nombre de Región';
     iEdit.setAttribute('data-target','#updateModal');
     iEdit.setAttribute('data-toggle','modal');
 
@@ -129,7 +129,8 @@ function createRegionUl(region){
     })
 
     let iNewCountry = document.createElement('i');
-    iNewCountry.className = 'fas fa-plus-circle';
+    iNewCountry.title = 'Agregar país a región';
+    iNewCountry.className = 'fas fa-plus-circle hidden';
     iNewCountry.setAttribute('data-target','#createModal');
     iNewCountry.setAttribute('data-toggle','modal');
 
@@ -142,11 +143,15 @@ function createRegionUl(region){
         
     })
 
+    iEllipsis.addEventListener('click',()=>{ showIcons(iEdit,iDelete,iNewCountry) } );
+    
+
     
     
     let countries = region.countries;
 
     divRegion.appendChild(pRegion);
+    divRegion.appendChild(iEllipsis);
     divRegion.appendChild(iDelete);
     divRegion.appendChild(iEdit);
     divRegion.appendChild(iNewCountry);
@@ -177,8 +182,11 @@ function createRegionUl(region){
             let regionElements = event.currentTarget.parentNode.parentNode.children;
             toggleSection(regionElements);
         });
+        let iEllipsisCountry = document.createElement('i');
+        iEllipsisCountry.className = 'fas fa-ellipsis-v';
 
         let iDeleteCountry = document.createElement('i');
+        iDeleteCountry.title = 'Eliminar País';
         iDeleteCountry.setAttribute('data-target','#deleteModal');
         iDeleteCountry.setAttribute('data-toggle','modal');
 
@@ -195,6 +203,7 @@ function createRegionUl(region){
 
 
         let iEditCountry = document.createElement('i');
+        iEditCountry.title = 'Editar nombre de país';
         iEditCountry.setAttribute('data-target','#updateModal');
         iEditCountry.setAttribute('data-toggle','modal');
 
@@ -209,7 +218,8 @@ function createRegionUl(region){
         })
 
         let iNewCity = document.createElement('i');
-        iNewCity.className = 'fas fa-plus-circle';
+        iNewCity.title = 'Agregar ciudad a país';
+        iNewCity.className = 'fas fa-plus-circle hidden';
         iNewCity.setAttribute('data-target','#createModal');
         iNewCity.setAttribute('data-toggle','modal');
     
@@ -223,11 +233,13 @@ function createRegionUl(region){
         })
 
 
-        iDeleteCountry.className = 'fas fa-trash-alt';
-        iEditCountry.className = 'fas fa-edit';
+        iDeleteCountry.className = 'fas fa-trash-alt hidden';
+        iEditCountry.className = 'fas fa-edit hidden';
 
+        iEllipsisCountry.addEventListener('click',()=>{ showIcons(iEditCountry, iDeleteCountry,iNewCity) } );
 
         divCountry.appendChild(pCountry);
+        divCountry.appendChild(iEllipsisCountry);
         divCountry.appendChild(iDeleteCountry);
         divCountry.appendChild(iEditCountry);
         divCountry.appendChild(iNewCity);
@@ -251,7 +263,12 @@ function createRegionUl(region){
             cityLi.id = cityId;
             cityLi.textContent = cityName;
 
+            let iEllipsisCity = document.createElement('i');
+            iEllipsisCity.className = 'fas fa-ellipsis-v';
+
+
             let iDeleteCity = document.createElement('i');
+            iDeleteCity.title = 'Borrar ciudad';
             iDeleteCity.setAttribute('data-target','#deleteModal');
             iDeleteCity.setAttribute('data-toggle','modal');
             iDeleteCity.addEventListener('click',()=>{
@@ -267,6 +284,7 @@ function createRegionUl(region){
 
 
             let iEditCity = document.createElement('i');
+            iEditCity.title = 'Editar nombre de ciudad';
             iEditCity.setAttribute('data-target','#updateModal');
             iEditCity.setAttribute('data-toggle','modal');
             iEditCity.addEventListener('click',()=>{
@@ -280,10 +298,12 @@ function createRegionUl(region){
             })
 
 
-            iDeleteCity.className = 'fas fa-trash-alt';
-            iEditCity.className = 'fas fa-edit';
+            iDeleteCity.className = 'fas fa-trash-alt hidden';
+            iEditCity.className = 'fas fa-edit hidden';
+            
+            iEllipsisCity.addEventListener('click',()=>{ showIcons(iEditCity, iDeleteCity) } );
 
-
+            cityLi.appendChild(iEllipsisCity);
             cityLi.appendChild(iDeleteCity);
             cityLi.appendChild(iEditCity);
             cityDiv.appendChild(cityLi);
@@ -317,6 +337,7 @@ async function deleteMe(event) {
     let deleteWhat = event.currentTarget.parentNode.parentNode.children[1].title;
     console.log(deleteWhat);
 
+    
     try{
 
         let deleteMe = await fetch(`${basepathServer}${deleteWhat}/${id}`, {
@@ -337,7 +358,18 @@ async function deleteMe(event) {
 
         }else{
 
-            location.reload();
+            //Obtengo el elemento (Region, pais o ciudad) que se quiere eliminar
+            const element = document.getElementById(id);
+            
+            //Le agrego la clase para darle efecto de caida
+            element.classList.add("fall");
+
+            //Al finalizar la transicion remuevo el elemento
+            element.addEventListener('transitionend', ()=>{
+
+                element.remove();
+            })
+
         }
 
 
@@ -474,5 +506,41 @@ async function createRegion(){
     }
 
 }
+
+function showIcons(edit, delet, create ){
+
+    if(create){
+
+        if(edit.classList.contains('hidden') & delet.classList.contains('hidden') & create.classList.contains('hidden') ){
+
+            edit.classList.remove('hidden');
+            delet.classList.remove('hidden');
+            create.classList.remove('hidden');
+        }else{
+    
+            edit.classList.add('hidden');
+            delet.classList.add('hidden');
+            create.classList.add('hidden');
+        }
+    }else{
+        
+        if(edit.classList.contains('hidden') & delet.classList.contains('hidden') ){
+
+            edit.classList.remove('hidden');
+            delet.classList.remove('hidden');
+
+        }else{
+    
+            edit.classList.add('hidden');
+            delet.classList.add('hidden');
+
+        } 
+    }
+
+
+
+}
+
+
 
 

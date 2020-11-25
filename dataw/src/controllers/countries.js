@@ -10,11 +10,11 @@ class Countries{
     async newCountry(req,res) {
 
         let country = req.body;
-        let idCountry = req.params;
+        let idRegion = req.params;
 
         try{
             
-            let region = await regionSchema.findById(idCountry);
+            let region = await regionSchema.findById(idRegion);
 
             if(region == null) throw "No existe region con ese id";
 

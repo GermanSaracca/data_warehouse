@@ -14,6 +14,7 @@ const authAdmin = require('../middlewares/authAdmin');//Middleware de autenticac
 const regionCtrl = require('../controllers/regions');
 const countryCtrl =  require('../controllers/countries');
 const cityCtrl = require('../controllers/cities');
+const companyCtrl = require('../controllers/companies');
 
 
 //***Rutas****
@@ -34,6 +35,18 @@ router.route('/updateUser/:_id').put(authAdmin,admin.updateUser);
 
 router.route('/deleteUser/:_id').delete(authAdmin,admin.deleteUser);
 
+
+
+//Companies
+
+router.route('/newCompany/:city').post(companyCtrl.newCompany);//El value de city sera la ciudad a la que pertenece la compania
+
+//el  1er param es el id de la compania, el 2do es la ciudad a la que va a pertenecer la compania
+router.route('/updateCompany/:id&:city').put(companyCtrl.updateCompany);
+
+router.route('/deleteCompany/:_id').delete(companyCtrl.deleteCompany);
+
+router.route('/companies').get(companyCtrl.getCompanies);
 
 
 
@@ -67,7 +80,10 @@ router.route('/updateCity/:_id').put(cityCtrl.updateCity); //Actualizar Ciudad
 
 router.route('/deleteCity/:_id').delete(cityCtrl.deleteCity); //Borrar Ciudad
 
-router.route('/cities/:_id').get(); //
+router.route('/cities').get(cityCtrl.getCities); //Obtener ciudades
+
+
+
 
 
 

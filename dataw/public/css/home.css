@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #F9DB6D;
+  background-color: #C2E812;
 }
 
 body .navbar {
@@ -16,9 +16,9 @@ body .navbar {
   display: flex;
   -ms-flex-line-pack: center;
       align-content: center;
-  background: #0B222C;
+  background: #111010;
   height: 10vh;
-  border-bottom: solid 5px #2A9D8F;
+  border-bottom: solid 5px #247BA0;
 }
 
 body .navbar .burger {
@@ -41,7 +41,7 @@ body .navbar .navbar-brand {
 }
 
 body .navbar #welcome {
-  color: #F9DB6D;
+  color: #C2E812;
   margin-top: 2.5vh;
 }
 
@@ -67,8 +67,8 @@ body .navbar .rigth-nav {
     margin-top: 10vh;
     width: 50%;
     height: 90vh;
-    background-color: #0B222C;
-    border-left: solid 3px #2A9D8F;
+    background-color: #111010;
+    border-left: solid 3px #247BA0;
   }
 }
 
@@ -108,24 +108,24 @@ body .navbar .rigth-nav .nav-ul a {
 }
 
 body .navbar .rigth-nav .nav-ul a:hover {
-  color: #F9DB6D;
+  color: #C2E812;
   -webkit-transition: 0.25s ease-in;
   transition: 0.25s ease-in;
 }
 
 body .navbar .rigth-nav .btn {
-  color: #F9DB6D;
-  background-color: #0B222C;
+  color: #C2E812;
+  background-color: #111010;
   border: none;
   font-weight: 500;
   text-transform: uppercase;
   text-transform: none;
-  border: solid 1px #F9DB6D;
+  border: solid 1px #C2E812;
 }
 
 body .navbar .rigth-nav .btn:hover {
-  color: #F9DB6D;
-  background-color: #2A9D8F;
+  color: #C2E812;
+  background-color: #247BA0;
 }
 
 body .container {
@@ -137,8 +137,8 @@ body .container {
           align-items: center;
   margin-top: 10vh;
   color: white;
-  background: #0B222C;
-  border: solid 5px #0B222C;
+  background: #111010;
+  border: solid 5px #111010;
   border-radius: 10px;
   width: 70vw;
   height: 70vh;
@@ -156,7 +156,7 @@ body .container::-webkit-scrollbar {
 body .container::-webkit-scrollbar-thumb {
   cursor: pointer;
   border-radius: 5px;
-  background-color: #2A9D8F;
+  background-color: #247BA0;
 }
 
 body .container::-webkit-scrollbar-track {
@@ -170,7 +170,7 @@ body .container .informacion {
 }
 
 body .container .informacion .underlined {
-  color: #F9DB6D;
+  color: #C2E812;
   margin-left: -20px;
   text-decoration: underline;
 }

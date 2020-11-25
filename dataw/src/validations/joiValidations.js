@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { Schema } = require('mongoose');
 
 
 const loginSchema = Joi.object({
@@ -26,10 +27,12 @@ const nameSchema = Joi.object({
 
     name: Joi.string().min(2)
 });
+
 const idSchema = Joi.object({
 
     _id: Joi.string().alphanum().min(24).max(24).required()
 });
+
 const updateUserSchema = Joi.object({
 
     name: Joi.string().min(2).required(),
@@ -43,7 +46,17 @@ const updateUserSchema = Joi.object({
 
 });
 
+const companySchema = Joi.object({
 
+    name: Joi.string().min(2).required(),
+
+    address: Joi.string().min(2).required(),
+
+    email: Joi.string().email({ tlds: { allow: false } }).required(),
+
+    phone: Joi.string().min(6).required()
+
+})
 
 
 module.exports = {
@@ -56,6 +69,8 @@ module.exports = {
 
     idJoi : idSchema,
 
-    updateUserJoi : updateUserSchema
+    updateUserJoi : updateUserSchema,
+    
+    companyJoi : companySchema
 
 }

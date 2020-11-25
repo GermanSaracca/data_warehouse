@@ -27,7 +27,7 @@ body{
     .navbar{
         display: flex;
         align-content: center;
-        background: $blue;
+        background: $black;
         height: 10vh;
         border-bottom: solid 6px $lightBlue;
 
@@ -64,7 +64,7 @@ body{
                 margin-top: 10vh;
                 width: 50%;
                 height: 90vh;
-                background-color: $blue;
+                background-color: $black;
                 border-left: solid 3px $lightBlue ;
             }
 
@@ -105,7 +105,7 @@ body{
             }
 
             .btn{
-                @include button($yellow,$blue);
+                @include button($yellow,$black);
                 text-transform: none;
                 border: solid 1px $yellow;
             }
@@ -142,7 +142,7 @@ body{
                         margin-bottom: 15px;
                     }
                     .btn-primary{
-                        @include button(white,$blue);
+                        @include button(white,$black);
                     }
                 }
                 .info{
@@ -167,7 +167,7 @@ body{
                 margin-left: 2.5vw;
                 align-items: flex-start;
                 width: 95%;
-                background-color: $blue;
+                background-color: $black;
                 border-radius: 5px;
                 padding: 10px;
                 min-height: 68vh;
@@ -187,20 +187,25 @@ body{
                     background-color: $lightBlue;
                 }
                 &::-webkit-scrollbar-corner {
-                    background-color: $blue;
+                    background-color: $black;
                     border-radius: 5px;
                 }
+
                 
                 .hidden{
                     display: none;
+                }
+                .fall {
+                    transform: translateY(8rem) rotateZ(20deg);
+                    opacity: 0;
                 }
                 .ul-region{
                     display: flex;
                     flex-direction: column;
                     justify-content: space-around;
-                    min-width: 25vw;
+                    min-width: 22vw;
                     border-radius: 5px;
-                    
+                    transition: all 1.2s ease;
 
                     .region-div{
                         display: flex;
@@ -208,22 +213,21 @@ body{
                         height: fit-content;
                         width: fit-content;
 
-
                         i { 
                             color: white;
                             margin: 8px;
                             cursor: pointer;
                             &:hover{
-                                transform: scale(1.5);
+                                transform: scale(1.4);
                             }
                         }
                     }
 
                     p{  
-                        background-color: $orange;
+                        background-color: $yellow;
                         cursor: pointer;
                         margin: 10px;
-                        padding: 2.5px 10px;
+                        padding: .5px 10px;
                         border-radius: 5px;
                         width: fit-content;
                         max-width: 175px;
@@ -233,16 +237,15 @@ body{
 
                         &:hover{
                             white-space: unset;
-
                         }
-
                     }
 
                     .ul-country{
                         
-                        color: $blue;
+                        color: $black;
                         text-align: center;
                         border-radius: 5px;
+                        transition: all 0.7s ease;
                         
                         .country-div{
                             @extend .region-div;
@@ -250,30 +253,49 @@ body{
 
                         p{
                             background-color: $lightBlue;
-                            padding: 2.5px 10px;
+                            padding: .5px 10px;
                             margin-left: 40px;
                             border-radius: 5px;
                             width: fit-content;
                             cursor: pointer;
+                            
                         }
 
                         .li-city{
                             background-color: white;
-                            color: $blue;
+                            color: $black;
                             list-style: none;
-                            padding: 2.5px 10px ;
+                            padding: .5px 10px;
                             margin: 10px 0px 5px 70px;
                             width: fit-content;
                             border-radius: 5px;
                             cursor: pointer;
-                            
+                            transition: all 0.7s ease;
+                            max-width:15vw;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            overflow-x: hidden;
+
+                            &:hover {
+                                white-space: unset;
+                                text-overflow: unset;
+                                overflow-x: hidden;
+     
+                            }
                             
                             i{
                                 margin-left: 15px;
                                 &:hover{
-                                    transform: scale(1.5);
+                                    transform: scale(1.4);
+                                }
+                                &:nth-child(2){
+                                    color: $lightBlue;
+                                }
+                                &:nth-child(3){
+                                    color: $lightBlue;
                                 }
                             }
+                            
                         }
                     }
                 }
@@ -294,7 +316,7 @@ body{
 
             .modal-header {
                 background-color: $yellow;
-                color: $blue;
+                color: $black;
             }
             .modal-body{
                 input{
@@ -302,23 +324,28 @@ body{
                     border: solid 2px $lightBlue;
                     border-radius: 5px;
                     padding: 5px;
+                    width: 60%;
                 }
             }
             .modal-footer {
-                .btn-secondary{
-                    @include button(white,rgb(28, 202, 28));
+                background-color: $yellow;
+                .btn-primary{
+                    @include button($black,rgb(255, 111, 0));
+                    color: white;
+                    border: solid 1px $black;
                     text-transform: none;
                     &:hover{
                         color: white;
-                        background-color: rgb(14, 145, 14);
+                        background-color: red;
                     }
                 }
-                .btn-primary{
-                    @include button($blue,$yellow);
+                .btn-secondary{
+                    @include button($black,$yellow);
+                    border: solid 1px $black;
                     text-transform: none;
                     &:hover{
                         color: white;
-                        background-color: rgb(175, 32, 7);
+                        background-color: $black;
                     }
                 }
             }
