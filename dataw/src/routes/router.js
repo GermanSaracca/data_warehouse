@@ -1,7 +1,7 @@
-const { response } = require('express');
+
 const express = require('express');
 const router = express.Router();
-const path = require('path');
+
 
 //Controllers
 const login = require('../controllers/login');
@@ -15,6 +15,9 @@ const regionCtrl = require('../controllers/regions');
 const countryCtrl =  require('../controllers/countries');
 const cityCtrl = require('../controllers/cities');
 const companyCtrl = require('../controllers/companies');
+const contactsCtrl= require('../controllers/contacts');
+
+
 
 
 //***Rutas****
@@ -35,14 +38,15 @@ router.route('/updateUser/:_id').put(authAdmin,admin.updateUser);
 
 router.route('/deleteUser/:_id').delete(authAdmin,admin.deleteUser);
 
+//Contactos
 
+router.route('/newContact').post(contactsCtrl.newContact);
 
 //Companies
 
 router.route('/newCompany/:city').post(companyCtrl.newCompany);//El value de city sera la ciudad a la que pertenece la compania
 
-//el  1er param es el id de la compania, el 2do es la ciudad a la que va a pertenecer la compania
-router.route('/updateCompany/:id&:city').put(companyCtrl.updateCompany);
+router.route('/updateCompany/:id&:city').put(companyCtrl.updateCompany);//1er param id de la compania, 2do la ciudad a la que va a pertenecer la compania
 
 router.route('/deleteCompany/:_id').delete(companyCtrl.deleteCompany);
 
@@ -70,7 +74,6 @@ router.route('/updateCountry/:_id').put(countryCtrl.updateCountry); //Actualizar
 
 router.route('/deleteCountry/:_id').delete(countryCtrl.deleteCountry); //Borrar pais
 
-router.route('/countries/:_id').get(); //Obtener todos los paises
 
 
 //Ciudad

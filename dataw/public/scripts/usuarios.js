@@ -118,14 +118,7 @@ async function registerUser(event) {
     //Alerta de usuario creado y reseteo de formulario
     if(data.codigo == 202){
 
-        alertCreation.style.display = 'block';
-        name.value = '';
-        lastname.value = '';
-        email.value = '';
-        firstPassword.value = '';
-        confirmPassword.value = '';
-        errorsMessage.innerText = '';
-        
+        location.reload();
     }
 }
 //Eliminar usuario

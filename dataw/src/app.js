@@ -4,7 +4,9 @@ const port = 3000;
 const router = require('./routes/router');
 const middlewares = require('./middlewares/middGlobals');
 const {db, URI_connection } = require('./database/mongo_connection');
-const createFirstAdmin = require('./models/createFirstAdmin');
+const createFirstAdmin = require('./controllers/createFirstAdmin');
+
+
 
 //Varios middlewares
 middlewares(app);
@@ -12,7 +14,7 @@ middlewares(app);
 //Router
 app.use('/',router);
 
-
+//DB conection
 db.once('open',()=>{ 
 
     console.log(`Mongo database connected to ${URI_connection}`);

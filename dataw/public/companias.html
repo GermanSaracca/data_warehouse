@@ -32,7 +32,7 @@
         <div class="rigth-nav" id="rigth-nav">
             <ul class="nav-ul" id="ul">
                 <li class="nav-li">
-                    <a href="">Contactos</a>
+                    <a href="./contactos.html">Contactos</a>
                 </li>
                 <li class="nav-li">
                     <a href="./usuarios.html" id="usuariosLi">Usuarios</a>
@@ -50,74 +50,25 @@
         </div>
     </nav>
     <main>
-        <section class="create-company">
 
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                Aquí se crearán las compañias que luego seran utilizadas para cargar la informacion
-                de los nuevos contactos.<br>
-                Tenga en cuenta que si no encuentra la <strong>ciudad</strong> donde esta ubicada la nueva <strong>compañia</strong>,
-                deberá cargarla primero en la seccion <strong>Región/Ciudad</strong>.<br>
-                En la seccion de abajo <i class="fas fa-arrow-down"></i> podrás ver, editar o eliminar cualquier compañia.
-            </div>
-            
-            <div class="center-alert">
-                <div class="alert alertCreation" id="alertCreation">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    Nuevo usuario registrado con exito!!
-                </div>
-            </div>
-
-            <div class="container" >
-                <i class="fas fa-rainbow"></i>
-                <h2>Nueva compañia</h2>
-                <form class="loginForm">
-                    <div class="form-group" >
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-                    </div> 
-                    <div class="form-group" >    
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control"  id="phone" name="phone" placeholder= "Phone" required>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" data-size="5" name="city" id="update_city">
-                            <option selected disabled>Busque una ciudad</option>
-                        </select>   
-                    </div>
-                    <div class="errorsContainer">
-                        <small id="errors"></small>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="btnSubmit">Registrar compañia</button>
-                </form>
-            </div>
-            <a href="#second"><i class="fas fa-arrow-down"></i></a>
-        </section>
         
         <section class="companies">
-            <a href="#nav" id="second"><i class="fas fa-arrow-up"></i></a>
-
             <div class="companies-container">
                 <i class="fas fa-rainbow"></i>
                 <h1 class="table-title">Compañias</h1>
                 <div class="table-fields">
-                    <div class="field">Name</div>
-                    <div class="field">Address</div>
+                    <div class="field">Nombre</div>
+                    <div class="field">Dirección</div>
                     <div class="field">Email</div>
-                    <div class="field">Phone</div>
-                    <div class="field">City</div>
-                    <div class="field">Edit/Delete</div>
+                    <div class="field">Telefono</div>
+                    <div class="field">Ciudad</div>
+                    <div class="field">Editar/Borrar</div>
                 </div>
                 <div class="companies-table" id="companies-table">
                     <!--Contenido creado desde JS-->
 
                 </div>
             </div>
-
             <!--Modal de update de company-->
             <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -130,16 +81,16 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group" >
-                                <input type="text" class="form-control" id="update_name" name="name" placeholder="Name" required>
+                                <input type="text" class="form-control" id="update_name" name="name" placeholder="Nombre" required>
                             </div> 
                             <div class="form-group" >    
-                                <input type="text" class="form-control" id="update_address" name="address" placeholder="Address" required>
+                                <input type="text" class="form-control" id="update_address" name="address" placeholder="Dirección" required>
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control" id="update_email" name="email" placeholder="Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="number" class="form-control" id="update_phone" name="email" placeholder="Phone number" required>
+                                <input type="number" class="form-control" id="update_phone" name="email" placeholder="Telefono" required>
                             </div>
                             <div class="form-group">
                                 <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" data-size="5" name="city" id="update_city">
@@ -157,7 +108,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Modal de confirmacion de borrado de company-->
             <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -176,10 +126,56 @@
                     </div>
                 </div>
             </div>
-
+            <a href="#second" ><i class="fas fa-arrow-down"></i></a>
         </section>
 
-        
+        <section class="create-company">
+            <a href="#nav" id="second"><i class="fas fa-arrow-up"></i></a>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                Aquí se crearán las compañias que luego seran utilizadas para cargar la informacion
+                de los nuevos contactos.<br>
+                Tenga en cuenta que si no encuentra la <strong>ciudad</strong> donde esta ubicada la nueva <strong>compañia</strong>,
+                deberás cargarla primero en la seccion <a href="./regiones.html"><strong>Región/Ciudad</strong></a>.<br>
+                En la seccion de arriba <i class="fas fa-arrow-up"></i> podrás ver, editar o eliminar cualquier compañia.
+            </div>
+            
+            <div class="center-alert">
+                <div class="alert alertCreation" id="alertCreation">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    Nuevo usuario registrado con exito!!
+                </div>
+            </div>
+
+            <div class="container" >
+                <i class="fas fa-rainbow"></i>
+                <h2>Nueva compañia</h2>
+                <form class="loginForm">
+                    <div class="form-group" >
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required>
+                    </div> 
+                    <div class="form-group" >    
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control"  id="phone" name="phone" placeholder= "Telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" data-size="5" name="city" id="update_city">
+                            <option selected disabled>Busque una ciudad</option>
+                        </select>   
+                    </div>
+                    <div class="errorsContainer">
+                        <small id="errors"></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Registrar compañia</button>
+                </form>
+            </div>
+            
+        </section>
 
 
     </main>

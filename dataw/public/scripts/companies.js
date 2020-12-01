@@ -6,7 +6,7 @@ const name = document.getElementById('name');
 const address = document.getElementById('address');
 const email = document.getElementById('email');
 const phone = document.getElementById('phone');
-const selectPicker1 = document.getElementsByClassName('selectpicker')[0];
+const selectPicker1 = document.getElementsByClassName('selectpicker')[1];
 const errors = document.getElementById('errors');
 const butonSubmit = document.getElementById('btnSubmit');
 
@@ -19,7 +19,7 @@ const updateName = document.getElementById('update_name');
 const updateAddress = document.getElementById('update_address');
 const updateEmail = document.getElementById('update_email');
 const updatePhone = document.getElementById('update_phone');
-const selectPicker2 = document.getElementsByClassName('selectpicker')[1];
+const selectPicker2 = document.getElementsByClassName('selectpicker')[0];
 const selectedCity = document.getElementById('selectedValue');
 const updateAlert = document.getElementById('update-alert');
 const modalBody = document.getElementsByClassName('modal-body');
@@ -64,7 +64,13 @@ async function getCompanies(params) {
         let email = companies[i].email;
         let address = companies[i].address;
         let phone = companies[i].phone;
-        let city = companies[i].city[0].name;
+        let city;
+        if(companies[i].city[0] == undefined){
+            city = 'City removed';
+        }else{
+            city = companies[i].city[0].name;
+        }
+        
         let companyId = companies[i]._id;
 
         createCompanyRow(name, address, email, phone, city, companyId);
@@ -269,6 +275,7 @@ async function updateCompany(event){
         phone: updatePhone.value
 
     };
+    console.log(cityName)
     
     let fetchUpdate = await fetch(`${basepathServer}updateCompany/${id}&${cityName}`, {
         method: 'PUT',

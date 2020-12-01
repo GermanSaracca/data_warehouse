@@ -26,7 +26,7 @@ module.exports = function(app){
     //uso tokens en todas las rutas excepto login y signup
     
     app.use(expressjwt({ secret: jwtSign, algorithms: ["HS256"] })
-    .unless({path: ['/login', "/home", "/"]}));
+    .unless({path: ['/login', "/home", "/","/newContact"]}));
 
 
 };

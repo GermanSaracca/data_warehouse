@@ -128,183 +128,52 @@ body .navbar .rigth-nav .btn:hover {
   background-color: #247BA0;
 }
 
-body main .create-company {
+body main .companies {
   background-color: #C2E812;
   height: 90vh;
 }
 
-body main .create-company .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 3vh;
-  border: solid 5px #111010;
-  border-radius: 10px;
-  background-color: white;
-  width: 35vw;
-  height: auto;
-  margin-top: 25px;
-  margin-bottom: 15px;
-}
-
-body main .create-company .container a {
-  font-weight: 500;
-  margin-top: 20px;
-  color: #111010;
-}
-
-body main .create-company .container .errorsContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-body main .create-company .container .errorsContainer small {
-  color: red;
-  font-weight: 700;
-}
-
-body main .create-company .container h1 {
-  font-weight: 500;
-}
-
-body main .create-company .container .fa-rainbow {
+body main .companies .fa-arrow-down {
   font-size: 40px;
-}
-
-body main .create-company .container .loginForm {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 95%;
-}
-
-body main .create-company .container .loginForm label {
-  font-weight: 500;
-  color: #111010;
-}
-
-body main .create-company .container .loginForm input {
-  border: solid 2px #247BA0;
-  color: #111010;
-}
-
-body main .create-company .container .loginForm .dropdown-toggle {
-  border: solid 2px #247BA0;
-}
-
-body main .create-company .container .loginForm .dropdown-menu {
-  border: solid 4px #C2E812;
-}
-
-body main .create-company .container .loginForm .inner {
-  border: none;
-}
-
-body main .create-company .container .loginForm #btnSubmit {
-  color: white;
-  background-color: #111010;
-  border: none;
-  font-weight: 500;
-  text-transform: uppercase;
-  width: 30vw;
-  height: 3.5vw;
-  margin-top: 10px;
-}
-
-body main .create-company .container .loginForm #btnSubmit:hover {
-  color: white;
-  background-color: #247BA0;
-}
-
-body main .create-company .alert, body main .create-company .center-alert .alertCreation {
-  padding: 20px;
-  background-color: #247BA0;
-  color: white;
-  width: 22vw;
-  margin-top: 10vh;
-  margin-left: 2vw;
-  display: block;
-  position: absolute;
-}
-
-body main .create-company .alert .closebtn, body main .create-company .center-alert .alertCreation .closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-
-body main .create-company .alert .closebtn:hover, body main .create-company .center-alert .alertCreation .closebtn:hover {
-  color: #111010;
-}
-
-body main .create-company .center-alert {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-body main .create-company .center-alert .alertCreation {
-  font-size: 24px;
-  background-color: green;
-  width: 22vw;
-  height: 35vh;
-  display: none;
-  position: absolute;
-  top: 10vh;
-  right: 2vw;
-  z-index: 1;
-  text-align: center;
-}
-
-body main .create-company .fa-arrow-down:nth-child(1) {
-  font-size: 40px;
-  color: #111010;
-  -webkit-transform: translate(20px, 20px);
-          transform: translate(20px, 20px);
-}
-
-body main .create-company .fa-arrow-down:nth-child(1):hover {
   color: #247BA0;
+  -webkit-transform: translate(10px, -40px);
+          transform: translate(10px, -40px);
+  -webkit-animation: pulse-arrow 2s infinite;
+          animation: pulse-arrow 2s infinite;
 }
 
-body main .companies {
-  background-color: #247BA0;
-  border-top: solid 6px #111010;
-}
-
-body main .companies .fa-arrow-up {
-  font-size: 40px;
-  color: white;
-  -webkit-transform: translate(20px, 30px);
-          transform: translate(20px, 30px);
-}
-
-body main .companies .fa-arrow-up:hover {
+body main .companies .fa-arrow-down:hover {
   color: #111010;
+}
+
+@-webkit-keyframes pulse-arrow {
+  0% {
+    -webkit-transform: translate(10px, -40px) scale(0.75);
+            transform: translate(10px, -40px) scale(0.75);
+  }
+  70% {
+    -webkit-transform: translate(10px, -40px) scale(1.15);
+            transform: translate(10px, -40px) scale(1.15);
+  }
+  100% {
+    -webkit-transform: translate(10px, -40px) scale(0.75);
+            transform: translate(10px, -40px) scale(0.75);
+  }
+}
+
+@keyframes pulse-arrow {
+  0% {
+    -webkit-transform: translate(10px, -40px) scale(0.75);
+            transform: translate(10px, -40px) scale(0.75);
+  }
+  70% {
+    -webkit-transform: translate(10px, -40px) scale(1.15);
+            transform: translate(10px, -40px) scale(1.15);
+  }
+  100% {
+    -webkit-transform: translate(10px, -40px) scale(0.75);
+            transform: translate(10px, -40px) scale(0.75);
+  }
 }
 
 body main .companies .companies-container {
@@ -318,17 +187,17 @@ body main .companies .companies-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 95vh;
+  height: 85vh;
   padding-top: 3vh;
 }
 
 body main .companies .companies-container .table-title {
   margin-bottom: 25px;
-  color: white;
+  color: #111010;
 }
 
 body main .companies .companies-container .fa-rainbow {
-  color: white;
+  color: #111010;
   font-size: 40px;
 }
 
@@ -339,8 +208,8 @@ body main .companies .companies-container .table-fields {
       grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 40px;
   width: 90vw;
-  background-color: #C2E812;
-  color: #111010;
+  background-color: #247BA0;
+  color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border: solid 4px #111010;
@@ -397,9 +266,8 @@ body main .companies .companies-container .companies-table .company-row {
 }
 
 body main .companies .companies-container .companies-table .company-row:hover {
-  background-color: #247BA0;
+  background-color: #C2E812;
   cursor: pointer;
-  color: white;
 }
 
 body main .companies .companies-container .companies-table .company-row .company-info {
@@ -513,5 +381,204 @@ body main .companies #updateModal .modal-footer .update-alert {
 body main .companies #updateModal .modal-footer .btn-primary {
   background-color: #111010;
   color: white;
+}
+
+body main .create-company {
+  background-color: #247BA0;
+  height: 100vh;
+  border-top: solid 5px #111010;
+}
+
+body main .create-company .fa-arrow-up:nth-child(1) {
+  font-size: 40px;
+  color: white;
+  -webkit-transform: translate(10px, 30px);
+          transform: translate(10px, 30px);
+  -webkit-animation: pulse-arrow-up 2s infinite;
+          animation: pulse-arrow-up 2s infinite;
+}
+
+body main .create-company .fa-arrow-up:nth-child(1):hover {
+  color: #111010;
+}
+
+@-webkit-keyframes pulse-arrow-up {
+  0% {
+    -webkit-transform: translate(10px, 30px) scale(0.75);
+            transform: translate(10px, 30px) scale(0.75);
+  }
+  70% {
+    -webkit-transform: translate(10px, 30px) scale(1.15);
+            transform: translate(10px, 30px) scale(1.15);
+  }
+  100% {
+    -webkit-transform: translate(10px, 30px) scale(0.75);
+            transform: translate(10px, 30px) scale(0.75);
+  }
+}
+
+@keyframes pulse-arrow-up {
+  0% {
+    -webkit-transform: translate(10px, 30px) scale(0.75);
+            transform: translate(10px, 30px) scale(0.75);
+  }
+  70% {
+    -webkit-transform: translate(10px, 30px) scale(1.15);
+            transform: translate(10px, 30px) scale(1.15);
+  }
+  100% {
+    -webkit-transform: translate(10px, 30px) scale(0.75);
+            transform: translate(10px, 30px) scale(0.75);
+  }
+}
+
+body main .create-company .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3vh;
+  border: solid 5px #111010;
+  border-radius: 10px;
+  background-color: white;
+  width: 35vw;
+  height: auto;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+body main .create-company .container a {
+  font-weight: 500;
+  margin-top: 20px;
+  color: #111010;
+}
+
+body main .create-company .container .errorsContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body main .create-company .container .errorsContainer small {
+  color: red;
+  font-weight: 700;
+}
+
+body main .create-company .container h1 {
+  font-weight: 500;
+}
+
+body main .create-company .container .fa-rainbow {
+  font-size: 40px;
+}
+
+body main .create-company .container .loginForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 95%;
+}
+
+body main .create-company .container .loginForm label {
+  font-weight: 500;
+  color: #111010;
+}
+
+body main .create-company .container .loginForm input {
+  border: solid 2px #247BA0;
+  color: #111010;
+}
+
+body main .create-company .container .loginForm .dropdown-toggle {
+  border: solid 2px #247BA0;
+}
+
+body main .create-company .container .loginForm .dropdown-menu {
+  border: solid 4px #C2E812;
+}
+
+body main .create-company .container .loginForm .inner {
+  border: none;
+}
+
+body main .create-company .container .loginForm #btnSubmit {
+  color: white;
+  background-color: #111010;
+  border: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  width: 30vw;
+  height: 3.5vw;
+  margin-top: 10px;
+}
+
+body main .create-company .container .loginForm #btnSubmit:hover {
+  color: white;
+  background-color: #247BA0;
+}
+
+body main .create-company .alert, body main .create-company .center-alert .alertCreation {
+  padding: 20px;
+  background-color: #C2E812;
+  color: #111010;
+  width: 22vw;
+  margin-top: 10vh;
+  margin-left: 2vw;
+  display: block;
+  position: absolute;
+}
+
+body main .create-company .alert .closebtn, body main .create-company .center-alert .alertCreation .closebtn {
+  margin-left: 15px;
+  color: #111010;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+body main .create-company .alert .fa-arrow-up, body main .create-company .center-alert .alertCreation .fa-arrow-up {
+  font-size: 18px;
+  -webkit-transform: none;
+          transform: none;
+  color: #111010;
+}
+
+body main .create-company .center-alert {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body main .create-company .center-alert .alertCreation {
+  font-size: 24px;
+  background-color: green;
+  width: 22vw;
+  height: 35vh;
+  display: none;
+  position: absolute;
+  top: 10vh;
+  right: 2vw;
+  z-index: 1;
+  text-align: center;
 }
 /*# sourceMappingURL=companias.css.map */

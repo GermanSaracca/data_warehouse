@@ -112,144 +112,31 @@ body{
         }
     }
     main{
-        .create-company{
+
+        .companies{
             background-color: $yellow;
             height: 90vh;
-    
-            .container{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 3vh;
-                border: solid 5px $black;
-                border-radius: 10px;
-                background-color: white;
-                width: 35vw;
-                height: auto;
-                margin-top: 25px;
-                margin-bottom: 15px;
-        
-                a{
-                    font-weight: 500;
-                    margin-top: 20px;
-                    color: $black;
-                }
-            
-                .errorsContainer{
-                    display:flex;
-                    justify-content: center;
-                    
-                    small{
-                        color:red;
-                        font-weight: 700;
-                    }
-                }
-                h1{
-                    font-weight: 500;
-                }
-                .fa-rainbow{
-                    font-size: 40px;
-                }
-                .loginForm{
-                    display: flex;
-                    flex-direction: column;
-                    width: 95%;
-        
-                    label{
-                        font-weight: 500;
-                        color: $black;
-                    }
-                    input {
-                        border: solid 2px $lightBlue;
-                        color: $black;
-                    }
-        
-                    //Clase del dropdown para el select buscador
-                    .dropdown-toggle{
-                        border: solid 2px $lightBlue;
-                        
-                    }
-                    .dropdown-menu {
-                        border: solid 4px $yellow;
-                        
-                    }
-                    .inner{
-                        border: none;
-                    }
 
-                    #btnSubmit {
-                        @include button(white,$black);
-                        width: 30vw;
-                        height: 3.5vw;
-                        margin-top: 10px;
-                        
+            .fa-arrow-down{
+                font-size: 40px;
+                color:$lightBlue;
+                transform: translate(10px, -40px);
+                animation: pulse-arrow 2s infinite;
+                &:hover{
+                    color: $black;
+                }
+                @keyframes pulse-arrow {
+                    0% {
+                      transform: translate(10px, -40px) scale(0.75);
                     }
-                }
-    
-            }
-            .alert {
-                padding: 20px;
-                background-color: $lightBlue;
-                color: white;
-                width: 22vw;
-                margin-top: 10vh;
-                margin-left: 2vw;
-                display: block;
-                position: absolute;
-        
-                
-                .closebtn {
-                    margin-left: 15px;
-                    color: white;
-                    font-weight: bold;
-                    float: right;
-                    font-size: 22px;
-                    line-height: 20px;
-                    cursor: pointer;
-                    transition: 0.3s;
-                }
-                .closebtn:hover {
-                    color: $black;
-                }
-            }
-            .center-alert{
-        
-                display: flex;
-                justify-content: center;
-        
-                .alertCreation {
-                    @extend .alert;
-                    font-size: 24px;
-                    background-color: green;
-                    width: 22vw;
-                    height: 35vh;
-                    display: none;//Cambiado desde JS a display: block;
-                    position: absolute;
-                    top: 10vh;
-                    right: 2vw;
-                    z-index: 1;
-                    text-align: center;
-                }
-            }
-            .fa-arrow-down:nth-child(1){
-                font-size: 40px;
-                color: $black;
-                transform: translate(20px,20px);
-                &:hover{
-                    color: $lightBlue;
-                }
-            }
-        }
-        .companies{
-            background-color: $lightBlue;
-            border-top: solid 6px $black;
-            
-            .fa-arrow-up{
-                font-size: 40px;
-                color: white;
-                transform: translate(20px, 30px);
-                &:hover{
-                    color: $black;
+                    
+                    70% {
+                      transform: translate(10px, -40px) scale(1.15);
+                    }
+                    
+                    100% {
+                      transform: translate(10px, -40px) scale(0.75);
+                    }
                 }
             }
 
@@ -257,16 +144,16 @@ body{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                height: 95vh;
+                height: 85vh;
                 padding-top: 3vh;
 
     
                 .table-title{
                     margin-bottom: 25px;
-                    color: white;
+                    color: $black;
                 }
                 .fa-rainbow {
-                    color: white;
+                    color: $black;
                     font-size: 40px;
                 }
                 .table-fields {
@@ -274,8 +161,8 @@ body{
                     grid-template-columns: repeat(6,1fr);
                     grid-auto-rows: 40px;
                     width: 90vw;
-                    background-color: $yellow;
-                    color: $black;
+                    background-color: $lightBlue;
+                    color: white;
                     border-top-left-radius: 10px;
                     border-top-right-radius: 10px;
                     border: solid 4px  $black;
@@ -321,9 +208,8 @@ body{
                         margin-left: -5px;
     
                         &:hover{
-                            background-color: $lightBlue;
-                            cursor: pointer;
-                            color: white;
+                            background-color: $yellow;
+                            cursor: pointer;   
                         }
                     
                         .company-info {
@@ -415,6 +301,153 @@ body{
                     }
                 }
     
+            }
+        }
+        .create-company{
+            background-color: $lightBlue;
+            height: 100vh;
+            border-top: solid 5px $black;
+            
+            .fa-arrow-up:nth-child(1){
+                font-size: 40px;
+                color: white;
+                transform: translate(10px, 30px);
+                animation: pulse-arrow-up 2s infinite;
+                &:hover{
+                    color: $black;
+                }
+                @keyframes pulse-arrow-up {
+                    0% {
+                      transform: translate(10px, 30px) scale(0.75);
+                    }
+                    
+                    70% {
+                      transform: translate(10px, 30px) scale(1.15);
+                    }
+                    
+                    100% {
+                      transform: translate(10px, 30px) scale(0.75);
+                    }
+                }
+            }
+            
+            .container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3vh;
+                border: solid 5px $black;
+                border-radius: 10px;
+                background-color: white;
+                width: 35vw;
+                height: auto;
+                margin-top: 25px;
+                margin-bottom: 15px;
+        
+                a{
+                    font-weight: 500;
+                    margin-top: 20px;
+                    color: $black;
+                }
+            
+                .errorsContainer{
+                    display:flex;
+                    justify-content: center;
+                    
+                    small{
+                        color:red;
+                        font-weight: 700;
+                    }
+                }
+                h1{
+                    font-weight: 500;
+                }
+                .fa-rainbow{
+                    font-size: 40px;
+                }
+                .loginForm{
+                    display: flex;
+                    flex-direction: column;
+                    width: 95%;
+        
+                    label{
+                        font-weight: 500;
+                        color: $black;
+                    }
+                    input {
+                        border: solid 2px $lightBlue;
+                        color: $black;
+                    }
+        
+                    //Clase del dropdown para el select buscador
+                    .dropdown-toggle{
+                        border: solid 2px $lightBlue;
+                        
+                    }
+                    .dropdown-menu {
+                        border: solid 4px $yellow;
+                        
+                    }
+                    .inner{
+                        border: none;
+                    }
+
+                    #btnSubmit {
+                        @include button(white,$black);
+                        width: 30vw;
+                        height: 3.5vw;
+                        margin-top: 10px;
+                        
+                    }
+                }
+    
+            }
+            .alert {
+                padding: 20px;
+                background-color: $yellow;
+                color: $black;
+                width: 22vw;
+                margin-top: 10vh;
+                margin-left: 2vw;
+                display: block;
+                position: absolute;
+        
+                
+                .closebtn {
+                    margin-left: 15px;
+                    color: $black;
+                    font-weight: bold;
+                    float: right;
+                    font-size: 22px;
+                    line-height: 20px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+
+                .fa-arrow-up{
+                    font-size: 18px;
+                    transform: none;
+                    color: $black;
+                }
+            }
+            .center-alert{
+        
+                display: flex;
+                justify-content: center;
+        
+                .alertCreation {
+                    @extend .alert;
+                    font-size: 24px;
+                    background-color: green;
+                    width: 22vw;
+                    height: 35vh;
+                    display: none;//Cambiado desde JS a display: block;
+                    position: absolute;
+                    top: 10vh;
+                    right: 2vw;
+                    z-index: 1;
+                    text-align: center;
+                }
             }
         }
     }
