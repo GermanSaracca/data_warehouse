@@ -50,6 +50,50 @@ class Contacts{
             console.log(e)
         }
     }
+    async getContacts(req,res){
+
+        try{
+
+            let contacts = await contactSchema.find({},{__v:0}).populate(
+                {   
+                    path:'company region country city',
+                    select: 'name'
+                }
+            );
+
+            let resp = new response(false,200,"Lista de conctactos completa", contacts)
+            res.send(resp);
+
+        }catch(e){
+
+            let resp = new response(true,400,e)
+            res.send(resp);
+        }
+    }
+    async deleteContacts(req,res){
+
+        let idsContacts = req.body;
+
+        console.log(idsContacts);
+
+        try{
+            //Por cada id del array voy a eliminar uno por uno
+            idsContacts.forEach(async (contactId) => {
+
+                let deleted = await contactSchema.findByIdAndDelete({_id: contactId});
+                console.log(deleted);
+            });
+
+            let resp = new response(false,202,"Contactos eliminado correctamente");
+            res.send(resp);
+
+        }catch(e){
+
+            let resp = new response(true,400,"No se pudo eliminar Contactos correctamente",e );
+            res.send(resp);
+        }
+
+    }
 }
 
 module.exports = new Contacts();

@@ -6,51 +6,59 @@ import { basepathServer } from './globals.js';
 
 //Nuevo contacto
 const newContactBtn = document.getElementById('createContact');
-
 const newContactContainer = document.getElementById('newContactContainer');
 const selectCompany = document.getElementsByClassName('selectpicker')[0];
-
 const name = document.getElementById('name');
 const lastname = document.getElementById('lastname');
 const position = document.getElementById('position');
 const email = document.getElementById('email');
 const company = document.getElementById('company');
-
 const selectRegion = document.getElementById('region');
 const selectCountry = document.getElementById('country');
 const selectCity = document.getElementById('city');
 const address = document.getElementById('address');
 let interest = document.getElementById('interest');
 let rangeOutput = document.getElementById('range-span');
-
 const phone = document.getElementById('phone');
 const phonePreference = document.getElementById('phonePreference');
-
 const whatsapp = document.getElementById('whatsapp');
 const whatsappPreference = document.getElementById('whatsappPreference');
-
 const instagram = document.getElementById('instagram');
 const instagramPreference = document.getElementById('instagramPreference');
-
 const facebook = document.getElementById('facebook');
 const facebookPreference = document.getElementById('facebookPreference');
-
 const linkedin = document.getElementById('linkedin');
 const linkedinPreference = document.getElementById('linkedinPreference');
-
-const profileImage = document.getElementById('profile-image');
 const btnSubmit = document.getElementById('btnSubmit');
 const errors = document.getElementById('errors');
 
+//Tabla de contactos
+let contactTable = document.getElementById('contacts-table');
+
+//Borrar contactos seleccionados
+let deleteContactsBtn = document.getElementById('deleteContacts');
+deleteContactsBtn.innerText = "Borrar contactos seleccionados (0)";
+let selectedContacts = [];
+let selectedCounter = 0;
+//Modal de borrado de contacto
+const deleteBody = document.getElementById('deleteBody');
+const submitDeleteContacts = document.getElementById('deleteOk');
+
+//Modal de actualizacion de usuario
+const updateContactContainer = document.getElementById('updateContactContainer');
 
 
 //Event Listener
 document.addEventListener('DOMContentLoaded',appendCompaniesToSelectOne);
 document.addEventListener('DOMContentLoaded',appendRegionsToSelects);
+document.addEventListener('DOMContentLoaded',getContacts);
+document.addEventListener('DOMContentLoaded',deleteAllSelectedFromLocal);
 interest.addEventListener("change",rangeOutputValue);
 newContactBtn.addEventListener('click',() => newContactContainer.style.display = 'flex');
 
 btnSubmit.addEventListener('click', createNewContact);
+deleteContactsBtn.addEventListener('click',textDelete)
+submitDeleteContacts.addEventListener('click',deleteSelectedContacts);
 
 
 
@@ -67,10 +75,13 @@ async function createNewContact(event) {
 
         companyId = company.options[company.selectedIndex].id;
     }
+    let address = '';
     let regionId;
     let countryId;
     let cityId;
-    if (selectRegion.options[selectRegion.selectedIndex] != undefined){
+    if (selectRegion.options[selectRegion.selectedIndex] != undefined
+        && selectCountry.options[selectCountry.selectedIndex] != undefined
+        && selectCity.options[selectCity.selectedIndex] != undefined){
 
         regionId = selectRegion.options[selectRegion.selectedIndex].id;
         countryId = selectCountry.options[selectCountry.selectedIndex].id;
@@ -165,6 +176,28 @@ async function createNewContact(event) {
         location.reload();
 
     }
+};
+
+async function deleteSelectedContacts() {
+
+    let selectedContacts = checkIfSelectedContacts();  
+    console.log(selectedContacts); 
+
+    let fetchDeleteContacts = await fetch(`${basepathServer}deleteContacts`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(selectedContacts)
+    });
+
+    let deletedData = await fetchDeleteContacts.json();
+
+    console.log(deletedData);
+    if(deletedData.codigo == 202){
+        location.reload();
+    }
 }
 
 async function appendCompaniesToSelectOne() {
@@ -190,7 +223,6 @@ async function appendCompaniesToSelectOne() {
     // Para refrescar el elemento select una vez que previamente le cargamos los options de companias.
     $('.selectpicker').selectpicker('refresh');
 }
-
 
 function  rangeOutputValue(){
 
@@ -276,4 +308,312 @@ async function appendRegionsToSelects(params) {
     });
 
 };
+
+async function getContacts() {
+
+    let fetchContacts = await fetch(`${basepathServer}contacts`,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    let allContacts = await fetchContacts.json();
+    let contacts = allContacts.data;
+    console.log(contacts);
+
+
+    contacts.forEach(contact =>{
+
+        createContactRow(contact);
+    })
+    
+};
+async function getContactById(contactId) {
+    
+    console.log(contactId);
+
+    let fetchContact = await fetch(`${basepathServer}contact/${contactId}`,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    let info = await fetchContact.json();
+    let contact = info.data;
+    console.log(contact);
+    
+    return contact;
+}
+
+function createContactRow(contact) {
+
+    let contactId = contact._id;
+    let name = contact.name;
+    let lastname = contact.lastname;
+    let email = contact.email;
+    let address = contact.address;
+
+    let region;
+    let country;
+    let city;
+    if (contact.region[0] == undefined || contact.country[0] == undefined || contact.city[0] == undefined  ){
+
+        region = 'No brindado por el contacto';
+        country = '';
+        city = '';
+    }else{
+        region = contact.region[0].name;
+        country = contact.country[0].name;
+        city = contact.city[0].name;
+    }
+
+    let company = contact.company[0].name;
+    let position = contact.position;
+    let interest = contact.interest;
+
+    let contactChannelsArray = contact.contactChannel;
+
+    //Empiezo a crear contenido dinamicamente
+    let contactRow = document.createElement('div');
+    let checkbox = document.createElement('input');
+
+    //Nombre,apellido y email
+    let div1 = document.createElement('div');
+
+    let pName = document.createElement('p');
+    let smallEmail = document.createElement('small');
+
+    //Pais y Region
+    let div2 = document.createElement('div');
+    let smallCity = document.createElement('small');
+    let pCountry = document.createElement('p');
+    let smallRegion = document.createElement('small');
+
+
+    let div3 = document.createElement('div');
+    let div4 = document.createElement('div');
+    //Intereses
+    let div5 = document.createElement('div');
+
+    managinContactChannels(contactChannelsArray,div5);
+
+    let div6 = document.createElement('div');
+    let divProgress = document.createElement('div');
+    let divProgressBar = document.createElement('div');
+   
+    let divEdits = document.createElement('div');
+    let iEdit = document.createElement('i');
+
+    contactRow.className = 'contact-row';
+    contactRow.id = contactId;
+    checkbox.className = 'contact-checkbox';
+    div1.className = 'contact-info';
+    div2.className = 'contact-info';
+    div3.className = 'contact-info';
+    div4.className = 'contact-info';
+    div5.className = 'contact-info';
+    div6.className = 'contact-info';
+    divProgress.className = 'progress';
+    divProgressBar.className = 'progress-bar';
+
+    checkbox.setAttribute('type','checkbox')
+    divProgressBar.setAttribute('role','progressbar');
+    divProgressBar.setAttribute('style',`width: ${interest}%`);
+    if(interest == 25) divProgressBar.style.backgroundColor = '#008080';
+    if(interest == 50) divProgressBar.style.backgroundColor = '#008000';
+    if(interest == 75) divProgressBar.style.backgroundColor = '#ffa500';
+    if(interest == 100) divProgressBar.style.backgroundColor = '#ff0000';
+    divProgressBar.innerText = `${interest}%`;
+
+    divEdits.className = 'contact-edit';
+    iEdit.className = 'fas fa-user-edit';
+    iEdit.setAttribute('data-target','#updateModal');
+    iEdit.setAttribute('data-toggle','modal');
+
+    iEdit.addEventListener('click',()=>{
+        
+        updateContactContainer.style.display = 'flex';
+
+        /* 
+        Al clickear en editar el contacto hago un request al back con toda
+        la informacion del contacto para llenar el modal con toda la info
+        */
+        let contactInfo = getContactById(contactId);
+        console.log(contactInfo);
+    });
+    
+    pName.innerText = `${name} ${lastname}`;
+    smallEmail.innerText = email;
+
+    smallCity.innerText = city;
+    pCountry.innerText = country;
+    smallRegion.innerText = region;
+
+    div3.innerText = company;
+    div4.innerText = position;
+    
+
+    checkbox.addEventListener('change',function(){
+
+        if(this.checked){
+
+            contactRow.className = 'contact-row selected-row' ;
+            selectedCounter += 1;
+            //Añado contacto al localstorage
+            saveSelectedContact(contactId);
+            deleteContactsBtn.innerText = `Borrar contactos seleccionados (${selectedCounter})`;
+
+        }else{
+
+            contactRow.className = 'contact-row'; 
+            selectedCounter -= 1;
+            //Remuevo contacto de localstorage
+            removeSelectedContact(contactId);
+            deleteContactsBtn.innerText = `Borrar contactos seleccionados (${selectedCounter})`;
+        }
+        // this.checked ? contactRow.className = 'contact-row selected-row' : contactRow.className = 'contact-row';
+    });
+
+
+    div1.appendChild(pName);
+    div1.appendChild(smallEmail);
+
+    div2.appendChild(smallCity);
+    div2.appendChild(pCountry);
+    div2.appendChild(smallRegion);
+
+    divProgress.appendChild(divProgressBar);
+    div6.appendChild(divProgress);
+    
+    contactRow.appendChild(checkbox);
+    contactRow.appendChild(div1);
+    contactRow.appendChild(div2);
+    contactRow.appendChild(div3);
+    contactRow.appendChild(div4);
+    contactRow.appendChild(div5);
+    contactRow.appendChild(div6);
+
+    divEdits.appendChild(iEdit);
+    contactRow.appendChild(divEdits);
+
+    contactTable.appendChild(contactRow);
+};
+
+function managinContactChannels(contactChannelsArray,div5){
+
+    contactChannelsArray.forEach(contactChannel =>{
+
+        //Recorro cada canal de cada contacto, si es favorito lo voy a mostrar
+        contactChannel.forEach(channel =>{
+
+            if(channel.preferences == "Canal favorito"){
+
+                let channelDiv = document.createElement('div');
+                channelDiv.className = 'channel';
+                channelDiv.innerText = channel.contactChannel;
+
+                // evento para mostrar la informacion del canal al clickearlo
+                channelDiv.addEventListener('click',()=>{
+                    if(channelDiv.innerHTML == `${channel.contactChannel} <br> (${channel.usserAccount})`){
+
+                        channelDiv.innerText = channel.contactChannel;
+                    }else{
+                        channelDiv.innerHTML = `${channel.contactChannel} <br> (${channel.usserAccount})`;
+                    }
+                })
+                div5.appendChild(channelDiv);
+            }
+
+        });
+        //Si el contacto no tiene canales preferidos solo se comunicara por email
+        let canalesFav = contactChannel.filter(channel => channel.preferences == 'Canal favorito');
+        let canalesSinPreferencia = contactChannel.filter(channel => channel.preferences == 'Sin preferencia');
+
+        //Si el usuario no tiene canal preferido elegido y tampoco canal sin preferencia entonces solo comunicar por email
+        if(canalesFav.length == 0){
+
+            let noChannel = document.createElement('div');
+            noChannel.className = 'channel';
+            noChannel.innerText = 'Solo email';
+            div5.appendChild(noChannel);
+ 
+        }
+        
+    })
+}
+
+function checkIfSelectedContacts(){
+
+    //Chequear si tengo algo en localstorage
+    let selectedContacts;
+
+    if(localStorage.getItem('selectedContacts') === null){
+        selectedContacts = [];
+    } else {
+
+        selectedContacts = JSON.parse(localStorage.getItem('selectedContacts'));
+    }
+    return selectedContacts;
+};
+
+function saveSelectedContact(contactId){
+
+    //Chequear si tengo algo en localstorages
+    let selectedContacts = checkIfSelectedContacts();
+
+    selectedContacts.push(contactId);
+    localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
+};
+
+function removeSelectedContact(contactId){
+
+    //Chequear si tengo algo en localstorage
+    let selectedContacts = checkIfSelectedContacts();
+
+    //Busco el valor de texto del elem clickeado
+    const selectedIndex = selectedContacts.indexOf( contactId );
+    //elimino el valor del array de todos
+    selectedContacts.splice( selectedIndex, 1);
+
+    
+    //Vuelvo a guardar el array
+    localStorage.setItem('selectedContacts',JSON.stringify(selectedContacts));
+
+};
+
+function deleteAllSelectedFromLocal(){
+
+    localStorage.setItem('selectedContacts', JSON.stringify(selectedContacts));
+};
+
+function textDelete() {
+    let selectedContacts = checkIfSelectedContacts();
+
+    let contactsLength = selectedContacts.length;
+
+    if(contactsLength == 1){
+        deleteBody.innerText = `¿Esta seguro que desea eliminar el contacto?`;
+        submitDeleteContacts.removeAttribute('disabled');
+
+    } else if (contactsLength > 1) {
+        deleteBody.innerText = `¿Esta seguro que desea eliminar los ${contactsLength} contactos seleccionados?`;
+        submitDeleteContacts.removeAttribute('disabled');
+
+    } else {
+        deleteBody.innerText = `No tiene ningun contacto seleccionado`;
+        submitDeleteContacts.setAttribute('disabled',true);
+    }
+};
+
+//Obtener info del contacto al clickear sobre editar
+function infoUsersByClick(){
+
+
+
+    return user;
+}
+
+
 

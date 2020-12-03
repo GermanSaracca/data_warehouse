@@ -42,6 +42,13 @@ router.route('/deleteUser/:_id').delete(authAdmin,admin.deleteUser);
 
 router.route('/newContact').post(contactsCtrl.newContact);
 
+router.route('/contacts').get(contactsCtrl.getContacts);
+
+router.route('/deleteContacts').delete(contactsCtrl.deleteContacts);
+
+router.route('/contact/:_id').get(); //Ruta para devolver informacion de un contacto especifico
+
+
 //Companies
 
 router.route('/newCompany/:city').post(companyCtrl.newCompany);//El value de city sera la ciudad a la que pertenece la compania
