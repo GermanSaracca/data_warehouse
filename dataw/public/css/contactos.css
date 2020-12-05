@@ -403,6 +403,7 @@ body main .contacts-container .contacts-table .contact-row .contact-info:nth-chi
 
 body main .contacts-container .contacts-table .contact-row .contact-info .progress {
   width: 120px;
+  height: 13.5px;
   border-radius: 10px;
   background-color: #d5d0d0;
 }
@@ -436,7 +437,7 @@ body main .contacts-container .contacts-table .contact-row .contact-edit i:hover
 }
 
 body main .contacts-container .contacts-table .selected-row {
-  background-color: #50add5;
+  background-color: #81c7e6;
 }
 
 body main .newContactModal, body main .updateContactModal {
@@ -637,6 +638,13 @@ body main .newContactModal .loginForm .contact-channel-data .phone .form-group s
 
 body main .newContactModal .loginForm .contact-channel-data .phone .form-group select, body main .updateContactModal .loginForm .contact-channel-data .phone .form-group select, body main .newContactModal .loginForm .contact-channel-data .whatsapp .form-group select, body main .updateContactModal .loginForm .contact-channel-data .whatsapp .form-group select, body main .newContactModal .loginForm .contact-channel-data .instagram .form-group select, body main .updateContactModal .loginForm .contact-channel-data .instagram .form-group select, body main .newContactModal .loginForm .contact-channel-data .facebook .form-group select, body main .updateContactModal .loginForm .contact-channel-data .facebook .form-group select, body main .newContactModal .loginForm .contact-channel-data .linkedin .form-group select, body main .updateContactModal .loginForm .contact-channel-data .linkedin .form-group select {
   cursor: pointer;
+  background-color: #C2E812;
+  border: none;
+  border-radius: unset;
+  border-top: solid 3px #247BA0;
+  border-right: solid 2px #247BA0;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 body main .newContactModal .loginForm .profile-image, body main .updateContactModal .loginForm .profile-image {

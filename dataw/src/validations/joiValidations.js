@@ -69,7 +69,7 @@ const contactSchema = Joi.object({
     region: Joi.string().max(40),
     country: Joi.string().max(40),
     city: Joi.string().max(40),
-    address: Joi.string().min(3),
+    address: Joi.string().min(0),
     interest: Joi.string(),
     contactChannels : Joi.array()
 

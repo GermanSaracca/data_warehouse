@@ -42,11 +42,15 @@ router.route('/deleteUser/:_id').delete(authAdmin,admin.deleteUser);
 
 router.route('/newContact').post(contactsCtrl.newContact);
 
+router.route('/updateContact/:_id').put(contactsCtrl.updateContact);
+
 router.route('/contacts').get(contactsCtrl.getContacts);
 
 router.route('/deleteContacts').delete(contactsCtrl.deleteContacts);
 
-router.route('/contact/:_id').get(); //Ruta para devolver informacion de un contacto especifico
+router.route('/contact/:_id').get(contactsCtrl.getContactById); //Ruta para devolver informacion de un contacto especifico
+
+router.route('/contacts/sortByName/:field&:order').get(contactsCtrl.sortContacts);
 
 
 //Companies

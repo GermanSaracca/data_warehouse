@@ -16,7 +16,7 @@ const company = document.getElementById('company');
 const selectRegion = document.getElementById('region');
 const selectCountry = document.getElementById('country');
 const selectCity = document.getElementById('city');
-const address = document.getElementById('address');
+let address = document.getElementById('address');
 let interest = document.getElementById('interest');
 let rangeOutput = document.getElementById('range-span');
 const phone = document.getElementById('phone');
@@ -46,21 +46,53 @@ const submitDeleteContacts = document.getElementById('deleteOk');
 
 //Modal de actualizacion de usuario
 const updateContactContainer = document.getElementById('updateContactContainer');
+const selectCompanyUpdate = document.getElementsByClassName('selectpicker')[1];
+const nameUpdate = document.getElementById('updatename');
+const lastnameUpdate = document.getElementById('updatelastname');
+const positionUpdate = document.getElementById('updateposition');
+const emailUpdate = document.getElementById('updateemail');
+const companyUpdate = document.getElementById('updatecompany');
+const selectRegionUpdate = document.getElementById('updateregion');
+const selectCountryUpdate = document.getElementById('updatecountry');
+const selectCityUpdate = document.getElementById('updatecity');
+const addressUpdate = document.getElementById('updateaddress');
+let interestUpdate = document.getElementById('updateinterest');
+let rangeOutputUpdate = document.getElementById('update-range-span');
+let phoneUpdate = document.getElementById('updatephone');
+let phonePreferenceUpdate = document.getElementById('updatephonePreference');
+let whatsappUpdate = document.getElementById('updatewhatsapp');
+let whatsappPreferenceUpdate = document.getElementById('updatewhatsappPreference');
+let instagramUpdate = document.getElementById('updateinstagram');
+let instagramPreferenceUpdate = document.getElementById('updateinstagramPreference');
+let facebookUpdate = document.getElementById('updatefacebook');
+let facebookPreferenceUpdate = document.getElementById('updatefacebookPreference');
+let linkedinUpdate = document.getElementById('updatelinkedin');
+let linkedinPreferenceUpdate = document.getElementById('updatelinkedinPreference');
+let btnSubmitUpdate = document.getElementById('updatebtnSubmit');
+let errorsUpdate = document.getElementById('updateerrors');
+
+//Ordenar informacion
+let sortByContact = document.getElementById('sort-contact');
+let sortByCountry = document.getElementById('sort-country');
+let sortByCompany = document.getElementById('sort-company');
+let sortByPosition = document.getElementById('sort-position');
+let sortByInterest = document.getElementById('sort-interest');
+
 
 
 //Event Listener
-document.addEventListener('DOMContentLoaded',appendCompaniesToSelectOne);
-document.addEventListener('DOMContentLoaded',appendRegionsToSelects);
+
+document.addEventListener('DOMContentLoaded',appendCompaniesToSelects);
+document.addEventListener('DOMContentLoaded',appendRegionsToSelects( selectRegion, selectCountry, selectCity ));
+document.addEventListener('DOMContentLoaded',appendRegionsToSelects( selectRegionUpdate, selectCountryUpdate, selectCityUpdate ));
 document.addEventListener('DOMContentLoaded',getContacts);
 document.addEventListener('DOMContentLoaded',deleteAllSelectedFromLocal);
-interest.addEventListener("change",rangeOutputValue);
+interest.addEventListener("change",()=>{ rangeOutputValue(interest, rangeOutput) });
+interestUpdate.addEventListener("change",()=>{ rangeOutputValue(interestUpdate, rangeOutputUpdate) });
 newContactBtn.addEventListener('click',() => newContactContainer.style.display = 'flex');
-
 btnSubmit.addEventListener('click', createNewContact);
-deleteContactsBtn.addEventListener('click',textDelete)
+deleteContactsBtn.addEventListener('click',textDelete);
 submitDeleteContacts.addEventListener('click',deleteSelectedContacts);
-
-
 
 
 
@@ -75,10 +107,10 @@ async function createNewContact(event) {
 
         companyId = company.options[company.selectedIndex].id;
     }
-    let address = '';
     let regionId;
     let countryId;
     let cityId;
+    
     if (selectRegion.options[selectRegion.selectedIndex] != undefined
         && selectCountry.options[selectCountry.selectedIndex] != undefined
         && selectCity.options[selectCity.selectedIndex] != undefined){
@@ -178,6 +210,118 @@ async function createNewContact(event) {
     }
 };
 
+async function updateContact( event, contactId) {
+    
+    event.preventDefault();
+
+    let companyId;
+    if (companyUpdate.options[companyUpdate.selectedIndex] != undefined){
+
+        companyId = companyUpdate.options[companyUpdate.selectedIndex].id;
+    }
+
+    let regionId;
+    let countryId;
+    let cityId;
+    if (selectRegionUpdate.options[selectRegionUpdate.selectedIndex] != undefined
+        && selectCountryUpdate.options[selectCountryUpdate.selectedIndex] != undefined
+        && selectCityUpdate.options[selectCityUpdate.selectedIndex] != undefined){
+
+        regionId = selectRegionUpdate.options[selectRegionUpdate.selectedIndex].id;
+        countryId = selectCountryUpdate.options[selectCountryUpdate.selectedIndex].id;
+        cityId = selectCityUpdate.options[selectCityUpdate.selectedIndex].id;
+    }
+
+    let nuevaInfo = {
+        
+        name: nameUpdate.value,
+        lastname: lastnameUpdate.value,
+        position: positionUpdate.value,
+        email: emailUpdate.value,
+        company: companyId,
+        region: regionId ,
+        country: countryId ,
+        city: cityId ,
+        address: addressUpdate.value,
+        interest: rangeOutputUpdate.innerText,
+        contactChannels: []
+    };
+
+    if(phoneUpdate.value != ''){
+        
+        let phoneChannel = {
+            contactChannel : "Phone",
+            usserAccount: phoneUpdate.value,
+            preferences: phonePreferenceUpdate.value
+        };
+        nuevaInfo.contactChannels.push(phoneChannel)
+    };
+    if(whatsappUpdate.value != ''){
+        
+        let whatsappChannel = {
+            contactChannel : "Whatsapp",
+            usserAccount: whatsappUpdate.value,
+            preferences: whatsappPreferenceUpdate.value
+        };
+        nuevaInfo.contactChannels.push(whatsappChannel)
+    };
+    if(instagramUpdate.value != ''){
+        
+        let instagramChannel = {
+            contactChannel : "Instagram",
+            usserAccount: instagramUpdate.value,
+            preferences: instagramPreferenceUpdate.value
+        };
+        nuevaInfo.contactChannels.push(instagramChannel)
+    };
+    if(facebookUpdate.value != ''){
+        
+        let facebookChannel = {
+            contactChannel : "Facebook",
+            usserAccount: facebookUpdate.value,
+            preferences: facebookPreferenceUpdate.value
+        };
+        nuevaInfo.contactChannels.push(facebookChannel)
+    };
+    if(linkedinUpdate.value != ''){
+        
+        let linkedinChannel = {
+            contactChannel : "Linkedin",
+            usserAccount: linkedinUpdate.value,
+            preferences: linkedinPreferenceUpdate.value
+        };
+        nuevaInfo.contactChannels.push(linkedinChannel)
+    };
+
+    console.log(nuevaInfo);
+    console.table(nuevaInfo);
+
+    let updateContact = await fetch(`${basepathServer}updateContact/${contactId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(nuevaInfo)
+    });
+
+    let updatedContact = await updateContact.json();
+
+    console.log(updatedContact);
+    
+    if(updatedContact.mensaje.details){
+
+        errorsUpdate.textContent = updatedContact.mensaje.details[0].message;
+    }else if (updatedContact.mensaje.code == 11000){
+
+        errorsUpdate.textContent = "Email ya en uso";
+    }else{
+
+        location.reload();
+
+    }
+}
+
 async function deleteSelectedContacts() {
 
     let selectedContacts = checkIfSelectedContacts();  
@@ -200,7 +344,7 @@ async function deleteSelectedContacts() {
     }
 }
 
-async function appendCompaniesToSelectOne() {
+async function appendCompaniesToSelects() {
     
     let fetchCompanies = await fetch(`${basepathServer}companies`, {
         method: 'GET',
@@ -220,11 +364,18 @@ async function appendCompaniesToSelectOne() {
         option.id = element._id;
         selectCompany.appendChild(option);
     });
+    companies.forEach(element => {
+
+        let option = document.createElement('option');
+        option.innerText = element.name;
+        option.id = element._id;
+        selectCompanyUpdate.appendChild(option);
+    });
     // Para refrescar el elemento select una vez que previamente le cargamos los options de companias.
     $('.selectpicker').selectpicker('refresh');
 }
 
-function  rangeOutputValue(){
+function rangeOutputValue(interest, rangeOutput){
 
     let value = interest.value;
     if(value == 0) rangeOutput.innerText = '0';
@@ -232,21 +383,12 @@ function  rangeOutputValue(){
     if(value == 2) rangeOutput.innerText = '50';
     if(value == 3) rangeOutput.innerText = '75';
     if(value == 4) rangeOutput.innerText = '100';
-}
+};
 
-async function appendRegionsToSelects(params) {
+async function appendRegionsToSelects(selectRegion,selectCountry,selectCity) {
 
-    let fetchRegions = await fetch(`${basepathServer}regions`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
-    });
 
-    let allRegions= await fetchRegions.json();
-    let regions = allRegions.data;
-
+    let regions = await fetchRegions();
 
     regions.forEach(element =>{
 
@@ -306,7 +448,6 @@ async function appendRegionsToSelects(params) {
             selectCity.appendChild(cityOption);
         })
     });
-
 };
 
 async function getContacts() {
@@ -326,13 +467,32 @@ async function getContacts() {
     contacts.forEach(contact =>{
 
         createContactRow(contact);
+    }) 
+};
+async function sortTableByColumn(fieldV,orderV){
+    
+    let field = fieldV;
+    let order = orderV;
+    
+    let fetchSortedContacts = await fetch(`${basepathServer}contacts/sortByName/${field}&${order}`,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    let sortedContacts = await fetchSortedContacts.json();
+    let contacts = sortedContacts.data;
+    contactTable.innerHTML = '';
+    contacts.forEach(contact =>{
+        
+        createContactRow(contact);
     })
     
-};
+}
+
 async function getContactById(contactId) {
     
-    console.log(contactId);
-
     let fetchContact = await fetch(`${basepathServer}contact/${contactId}`,{
         method: 'GET',
         headers: {
@@ -342,8 +502,7 @@ async function getContactById(contactId) {
     });
     let info = await fetchContact.json();
     let contact = info.data;
-    console.log(contact);
-    
+
     return contact;
 }
 
@@ -360,7 +519,7 @@ function createContactRow(contact) {
     let city;
     if (contact.region[0] == undefined || contact.country[0] == undefined || contact.city[0] == undefined  ){
 
-        region = 'No brindado por el contacto';
+        region = 'No brindado por el contacto asddddddddd ddddd  dddddddddasdasdas asdasdasd asd ';
         country = '';
         city = '';
     }else{
@@ -432,16 +591,16 @@ function createContactRow(contact) {
     iEdit.setAttribute('data-target','#updateModal');
     iEdit.setAttribute('data-toggle','modal');
 
-    iEdit.addEventListener('click',()=>{
+    iEdit.addEventListener('click',async ()=>{
         
         updateContactContainer.style.display = 'flex';
-
         /* 
         Al clickear en editar el contacto hago un request al back con toda
         la informacion del contacto para llenar el modal con toda la info
         */
-        let contactInfo = getContactById(contactId);
-        console.log(contactInfo);
+        let contactInfo = await getContactById(contactId);
+
+        fillUpdateModalInfo(contactInfo);
     });
     
     pName.innerText = `${name} ${lastname}`;
@@ -607,13 +766,234 @@ function textDelete() {
     }
 };
 
-//Obtener info del contacto al clickear sobre editar
-function infoUsersByClick(){
+async function fillUpdateModalInfo(contact){
+
+    //Reseteo todo
+    nameUpdate.value = '';
+    lastnameUpdate.value = '';
+    positionUpdate.value = '';
+    emailUpdate.value = '';
+    addressUpdate.value = '';
+    rangeOutputUpdate.innerText = '';
+    interestUpdate.value = 0;
+    phoneUpdate.value = '';
+    phonePreferenceUpdate.value = 'Sin preferencia';
+    whatsappUpdate.value = '';
+    whatsappPreferenceUpdate.value = 'Sin preferencia';
+    instagramUpdate.value = '';
+    instagramPreferenceUpdate.value = 'Sin preferencia';
+    facebookUpdate.value = '';
+    facebookPreferenceUpdate.value = 'Sin preferencia';
+    linkedinUpdate.value = '';
+    linkedinPreferenceUpdate.value = 'Sin preferencia';
+
+    //Aplico info
+    nameUpdate.value = contact.name;
+    lastnameUpdate.value = contact.lastname;
+    positionUpdate.value = contact.position;
+    emailUpdate.value = contact.email;
+
+    //Convierto en array los elementos hijos del buscador de companias
+    let arrayCompanyOptions = Array.from($('.selectpicker')[1].children) ;
+    //Busco dentro de las opciones la que equivalga a la compania del contacto y le doy el atributo de selected
+    let contactCompany = arrayCompanyOptions.find(option => option.innerText == contact.company[0].name);
+    contactCompany.setAttribute('selected', true);
+    $('.selectpicker').selectpicker('refresh');
+
+    addressUpdate.value = contact.address;
+
+    if (contact.region[0] != undefined && contact.country[0]!= undefined && contact.city[0] != undefined  ){
+
+        //Convierto la coleccion de opciones html en un array para iterarlo.
+        let arrayRegionOptions = Array.from(selectRegionUpdate.options);
+
+        //Busco el indice de la opcion que equivale a la region del contacto
+        let indexOfRegion = arrayRegionOptions.findIndex(option => option.value == contact.region[0].name);
+
+        //Le doy el indice selected que tiene que usar
+        selectRegionUpdate.options.selectedIndex = indexOfRegion;
+
+        //Lo que hago aca es automaticamente voy a cargar cada  select de Pais y Ciudad
+        // con los paises y ciudades acordes a la region del contacto!!
+        // Pero ademas voy a darle el atributo de selected al pais y ciudad que sea igual a la del contacto!
+        let regions = await fetchRegions();
+
+        let thisRegion = regions.filter(element => element.name == contact.region[0].name );
+
+        let countries = thisRegion[0].countries;
+
+        selectCountryUpdate.innerHTML = '';
+
+        countries.forEach(country =>{
+
+            let countryOption = document.createElement('option');
+            countryOption.innerText = country.name;
+            countryOption.id = country._id;
+
+            if(countryOption.innerText == contact.country[0].name){
+                countryOption.setAttribute('selected', true);
+            }
+            
+            selectCountryUpdate.appendChild(countryOption);
+        })
+
+        let thisCountry = countries.filter(element => element.name == contact.country[0].name);
+        let cities = thisCountry[0].cities;
+
+        selectCityUpdate.innerHTML = '';
+        cities.forEach(city =>{
+
+            let cityOption = document.createElement('option');
+            cityOption.innerText = city.name;
+            cityOption.id = city._id;
+            if(cityOption.innerText == contact.city[0].name){
+                cityOption.setAttribute('selected', true);
+            }
+            selectCityUpdate.appendChild(cityOption);
+        })
+    }else{
+
+        selectRegionUpdate.innerHTML = '<option selected disabled>Select region</option>';
+        selectCountryUpdate.innerHTML = ''; 
+        selectCityUpdate.innerHTML = '';
+        let regions = await fetchRegions();
+        regions.forEach(element =>{
+
+            let option = document.createElement('option');
+            option.innerText = element.name;
+            option.id = element._id;
+            selectRegionUpdate.appendChild(option);
+    
+        })
+    }
 
 
 
-    return user;
-}
+    //Interes en la compania
+    rangeOutputUpdate.innerText = `${contact.interest}`;
+    if(contact.interest == 0) interestUpdate.value = 0;
+    if(contact.interest == 25) interestUpdate.value = 1;
+    if(contact.interest == 50) interestUpdate.value = 2;
+    if(contact.interest == 75) interestUpdate.value = 3;
+    if(contact.interest == 100) interestUpdate.value = 4;
+    
+    let contactChannels = contact.contactChannel[0];
+
+    //Si el Array de canales no esta vacio aplico las preferencias a los campos
+    if(contactChannels != ''){
+        
+        contactChannels.forEach(channel =>{
+
+            if(channel.contactChannel == 'Phone' && channel.preferences != ''){
+
+                phoneUpdate.value = channel.usserAccount;
+                phonePreferenceUpdate.value = channel.preferences;
+            };
+            if(channel.contactChannel == 'Whatsapp' && channel.preferences != ''){
+
+                whatsappUpdate.value = channel.usserAccount;
+                whatsappPreferenceUpdate.value = channel.preferences;
+            };
+            if(channel.contactChannel == 'Instagram' && channel.preferences != ''){
+
+                instagramUpdate.value = channel.usserAccount;
+                instagramPreferenceUpdate.value = channel.preferences;
+            };
+            if(channel.contactChannel == 'Facebook' && channel.preferences != ''){
+
+                facebookUpdate.value = channel.usserAccount;
+                facebookPreferenceUpdate.value = channel.preferences;
+            };
+            if(channel.contactChannel == 'Linkedin' && channel.preferences != ''){
+
+                linkedinUpdate.value = channel.usserAccount;
+                linkedinPreferenceUpdate.value = channel.preferences;
+            };
+        })
+    };
+
+    let contactId = contact._id;
+
+    btnSubmitUpdate.addEventListener('click',(event)=>{
+
+        updateContact(event,contactId);
+    } );
+
+};
+
+async function fetchRegions(){
+
+    let fetchRegions = await fetch(`${basepathServer}regions`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    let allRegions= await fetchRegions.json();
+    let regions = allRegions.data;
+    return regions;
+};
+
+
+let orderContact = 0;
+sortByContact.addEventListener('click',()=>{
+
+    if(orderContact == 0){ orderContact = 1; }
+    else if(orderContact == 1){ orderContact = -1; }
+    else if(orderContact == -1){ orderContact = 1; };
+  
+    let field = 'name';
+    sortTableByColumn(field,orderContact);
+});
+
+let orderCountry = 0;
+sortByCountry.addEventListener('click',()=>{
+
+    if(orderCountry == 0){ orderCountry = 1; }
+    else if(orderCountry == 1){ orderCountry = -1; }
+    else if(orderCountry == -1){ orderCountry = 1; };
+
+    let field = 'country';
+    sortTableByColumn(field,orderCountry);   
+});
+
+let orderCompany = 0; ////////////No ordenando bien!
+sortByCompany.addEventListener('click',()=>{
+
+    if(orderCompany == 0){ orderCompany = 1; }
+    else if(orderCompany == 1){ orderCompany = -1; }
+    else if(orderCompany == -1){ orderCompany = 1; };
+
+    let field = 'company';
+    sortTableByColumn(field,orderCompany); 
+});
+
+let orderPosition = 0;
+sortByPosition.addEventListener('click',()=>{
+
+    if(orderPosition == 0){ orderPosition = 1; }
+    else if(orderPosition == 1){ orderPosition = -1; }
+    else if(orderPosition == -1){ orderPosition = 1; };
+
+    let field = 'position';
+    sortTableByColumn(field,orderPosition);  
+});
+
+let orderInterest = 0;
+sortByInterest.addEventListener('click',()=>{
+
+    if(orderInterest == 0){ orderInterest = 1; }
+    else if(orderInterest == 1){ orderInterest = -1; }
+    else if(orderInterest == -1){ orderInterest = 1; };
+
+    let field = 'interest';
+    sortTableByColumn(field,orderInterest);  
+});
+
+
+
 
 
 

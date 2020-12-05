@@ -316,11 +316,13 @@ body{
 
                         .progress{
                             width: 120px;
+                            height: 13.5px;
                             border-radius: 10px;
                             background-color: rgb(213, 208, 208);
                             
                             .progress-bar{
                                 border-radius: 10px;
+                                
                             }
                         }
 
@@ -474,6 +476,7 @@ body{
                         .form-group{
                             width: 15vw;
                             font-weight: 500;
+
                             .channel-title{
                                 color: $black;
                                 padding: 5px 0px 5px 30px;                           
@@ -489,6 +492,13 @@ body{
                             }
                             select{
                                 cursor: pointer;
+                                background-color: $yellow;
+                                border: none;
+                                border-radius: unset;
+                                border-top: solid 3px $lightBlue;                                                                
+                                border-right: solid 2px $lightBlue;
+                                border-bottom-left-radius: 5px;              
+                                border-top-right-radius: 5px;    
                             }
                         }
                     }
