@@ -103,7 +103,6 @@ class Contacts{
     }
     async getContacts(req,res){
 
-
         try{
 
             let contacts = await contactSchema.find({},{__v:0}).populate(
@@ -113,8 +112,6 @@ class Contacts{
                 }
             );
             
-
-    
             let resp = new response(false,200,"Lista de conctactos completa", contacts)
             res.send(resp);
 
@@ -177,9 +174,6 @@ class Contacts{
         //Sera el campo por cual ordenar los contactos
         let field = req.params.field;
 
-        console.log(order);
-        console.log(field);
-
         try{
 
             let contacts = await contactSchema.find({},{__v:0}).populate(
@@ -187,10 +181,9 @@ class Contacts{
                     path:'company region country city',
                     select: 'name'
                 }
-            ).sort({[field]: [order]});
-            
+            ).sort({[field]: [order]});;
 
-            let resp = new response(false,200,"Lista de conctactos completa", contacts)
+            let resp = new response(false,200,"Lista de conctactos completa", contacts);
             res.send(resp);
 
         }catch(e){

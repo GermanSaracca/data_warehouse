@@ -258,15 +258,15 @@ body main .contacts-container .table-fields .field input[type=checkbox] {
   height: 18px;
 }
 
-body main .contacts-container .table-fields .field .fa-sort {
+body main .contacts-container .table-fields .field .fa-sync-alt, body main .contacts-container .table-fields .field .fa-sort {
   cursor: pointer;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: .2s;
+  transition: .2s;
 }
 
-body main .contacts-container .table-fields .field .fa-sort:hover {
-  -webkit-transform: scale(1.7);
-          transform: scale(1.7);
+body main .contacts-container .table-fields .field .fa-sync-alt:hover, body main .contacts-container .table-fields .field .fa-sort:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
 }
 
 body main .contacts-container .contacts-table {

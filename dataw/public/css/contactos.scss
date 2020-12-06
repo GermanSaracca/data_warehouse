@@ -195,11 +195,11 @@ body{
                         width: 18px;
                         height: 18px;
                     }
-                    .fa-sort{
+                    .fa-sync-alt,.fa-sort{
                         cursor: pointer;
-                        transition: .3s ;
+                        transition: .2s ;
                         &:hover{
-                            transform: scale(1.7);
+                            transform: scale(1.4);
                         }
                     }
                 }

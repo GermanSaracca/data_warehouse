@@ -34,6 +34,7 @@ const errors = document.getElementById('errors');
 
 //Tabla de contactos
 let contactTable = document.getElementById('contacts-table');
+let resetTable = document.getElementById('reset-table');
 
 //Borrar contactos seleccionados
 let deleteContactsBtn = document.getElementById('deleteContacts');
@@ -45,6 +46,8 @@ const deleteBody = document.getElementById('deleteBody');
 const submitDeleteContacts = document.getElementById('deleteOk');
 
 //Modal de actualizacion de usuario
+
+let loginForm = document.getElementsByClassName('loginForm')[1];
 const updateContactContainer = document.getElementById('updateContactContainer');
 const selectCompanyUpdate = document.getElementsByClassName('selectpicker')[1];
 const nameUpdate = document.getElementById('updatename');
@@ -78,6 +81,9 @@ let sortByCompany = document.getElementById('sort-company');
 let sortByPosition = document.getElementById('sort-position');
 let sortByInterest = document.getElementById('sort-interest');
 
+//Buscador de contactos
+let inputContact = document.getElementById('input-find-contact');
+let findContact = document.getElementById('find-contact');
 
 
 //Event Listener
@@ -91,12 +97,62 @@ interest.addEventListener("change",()=>{ rangeOutputValue(interest, rangeOutput)
 interestUpdate.addEventListener("change",()=>{ rangeOutputValue(interestUpdate, rangeOutputUpdate) });
 newContactBtn.addEventListener('click',() => newContactContainer.style.display = 'flex');
 btnSubmit.addEventListener('click', createNewContact);
+btnSubmitUpdate.addEventListener('click',updateContact);
 deleteContactsBtn.addEventListener('click',textDelete);
 submitDeleteContacts.addEventListener('click',deleteSelectedContacts);
+findContact.addEventListener('click',findContacts);
+resetTable.addEventListener('click', getContacts);
 
 
 
 //Funciones
+async function findContacts(){
+
+    let value = inputContact.value;
+
+    let fetchContacts = await fetch(`${basepathServer}contacts`,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    let allContacts = await fetchContacts.json();
+    let contacts = allContacts.data;
+    
+    let finded = '';
+
+    let lastnamesFound = contacts.filter(e => e.lastname == value);
+    if(lastnamesFound != '') finded = lastnamesFound;
+
+    let regionsFound = contacts.filter(e => e.region[0].name == value);
+    if(regionsFound  != '') finded = regionsFound ;
+
+    let countriesFound = contacts.filter(e => e.country[0].name == value);
+    if(countriesFound != '') finded = countriesFound;
+
+    let citiesFound = contacts.filter(e => e.city[0].name == value);
+    if(citiesFound != '') finded = citiesFound;
+
+    let companiesFound = contacts.filter(e => e.company[0].name == value);
+    if(companiesFound != '') finded = companiesFound;
+
+    let positionsFound = contacts.filter(e => e.position == value);
+    if(positionsFound != '') finded = positionsFound;
+
+    if(finded != ''){
+
+        contactTable.innerHTML = '';
+
+        finded.forEach(contact =>{ createContactRow(contact) });
+    }else{
+
+        inputContact.value = "No se encontraron resultados";
+
+    }
+
+}
+
 
 async function createNewContact(event) {
 
@@ -210,9 +266,12 @@ async function createNewContact(event) {
     }
 };
 
-async function updateContact( event, contactId) {
+async function updateContact(event) {
     
     event.preventDefault();
+
+    let contactId = loginForm.id;
+    
 
     let companyId;
     if (companyUpdate.options[companyUpdate.selectedIndex] != undefined){
@@ -293,8 +352,8 @@ async function updateContact( event, contactId) {
         nuevaInfo.contactChannels.push(linkedinChannel)
     };
 
-    console.log(nuevaInfo);
-    console.table(nuevaInfo);
+    // console.log(nuevaInfo);
+    // console.table(nuevaInfo);
 
     let updateContact = await fetch(`${basepathServer}updateContact/${contactId}`, {
         method: 'PUT',
@@ -307,7 +366,6 @@ async function updateContact( event, contactId) {
 
     let updatedContact = await updateContact.json();
 
-    console.log(updatedContact);
     
     if(updatedContact.mensaje.details){
 
@@ -463,33 +521,13 @@ async function getContacts() {
     let contacts = allContacts.data;
     console.log(contacts);
 
-
+    contactTable.innerHTML = '';
     contacts.forEach(contact =>{
 
         createContactRow(contact);
     }) 
 };
-async function sortTableByColumn(fieldV,orderV){
-    
-    let field = fieldV;
-    let order = orderV;
-    
-    let fetchSortedContacts = await fetch(`${basepathServer}contacts/sortByName/${field}&${order}`,{
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
-    });
-    let sortedContacts = await fetchSortedContacts.json();
-    let contacts = sortedContacts.data;
-    contactTable.innerHTML = '';
-    contacts.forEach(contact =>{
-        
-        createContactRow(contact);
-    })
-    
-}
+
 
 async function getContactById(contactId) {
     
@@ -768,6 +806,8 @@ function textDelete() {
 
 async function fillUpdateModalInfo(contact){
 
+    //Le atribuyo el id del contacto al contenedor del formulario de update 
+    loginForm.id = contact._id;
     //Reseteo todo
     nameUpdate.value = '';
     lastnameUpdate.value = '';
@@ -912,12 +952,6 @@ async function fillUpdateModalInfo(contact){
         })
     };
 
-    let contactId = contact._id;
-
-    btnSubmitUpdate.addEventListener('click',(event)=>{
-
-        updateContact(event,contactId);
-    } );
 
 };
 
@@ -935,7 +969,27 @@ async function fetchRegions(){
     let regions = allRegions.data;
     return regions;
 };
-
+async function sortTableByColumn(fieldV,orderV){
+    
+    let field = fieldV;
+    let order = orderV;
+    
+    let fetchSortedContacts = await fetch(`${basepathServer}contacts/sortByName/${field}&${order}`,{
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    });
+    let sortedContacts = await fetchSortedContacts.json();
+    let contacts = sortedContacts.data;
+    contactTable.innerHTML = '';
+    contacts.forEach(contact =>{
+        
+        createContactRow(contact);
+    })
+    
+}
 
 let orderContact = 0;
 sortByContact.addEventListener('click',()=>{
@@ -959,16 +1013,16 @@ sortByCountry.addEventListener('click',()=>{
     sortTableByColumn(field,orderCountry);   
 });
 
-let orderCompany = 0; ////////////No ordenando bien!
-sortByCompany.addEventListener('click',()=>{
+// let orderCompany = 0; 
+// sortByCompany.addEventListener('click',()=>{
 
-    if(orderCompany == 0){ orderCompany = 1; }
-    else if(orderCompany == 1){ orderCompany = -1; }
-    else if(orderCompany == -1){ orderCompany = 1; };
+//     if(orderCompany == 0){ orderCompany = 1; }
+//     else if(orderCompany == 1){ orderCompany = -1; }
+//     else if(orderCompany == -1){ orderCompany = 1; };
 
-    let field = 'company';
-    sortTableByColumn(field,orderCompany); 
-});
+//     let field = 'company';
+//     sortTableByColumn(field,orderCompany); 
+// });
 
 let orderPosition = 0;
 sortByPosition.addEventListener('click',()=>{

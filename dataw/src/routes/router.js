@@ -53,6 +53,7 @@ router.route('/contact/:_id').get(contactsCtrl.getContactById); //Ruta para devo
 router.route('/contacts/sortByName/:field&:order').get(contactsCtrl.sortContacts);
 
 
+
 //Companies
 
 router.route('/newCompany/:city').post(companyCtrl.newCompany);//El value de city sera la ciudad a la que pertenece la compania

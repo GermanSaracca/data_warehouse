@@ -52,9 +52,9 @@
     <main>
         <div class="find-create">
             <div class="input-group" >
-                <input type="text" class="form-control" placeholder="Busque un contacto..">
+                <input type="text" class="form-control" id="input-find-contact" placeholder="Busque un contacto..">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" id="find-contact"><i class="fas fa-search"></i></button>
                 </div>
             </div>
             <button class="btn btn-primary" id="createContact">Agregar contacto</button>
@@ -62,7 +62,7 @@
         </div>
         <div class="contacts-container">
             <div class="table-fields">
-                <span></span>
+                <div class="field"><i class="fas fa-sync-alt" id="reset-table"></i></div>
                 <div class="field">Contacto&nbsp;<i class="fas fa-sort" id="sort-contact"></i></div>
                 <div class="field">País/Región&nbsp;<i class="fas fa-sort" id="sort-country"></i></div>
                 <div class="field">Compañía&nbsp;<i class="fas fa-sort" id="sort-company"></i></div>
