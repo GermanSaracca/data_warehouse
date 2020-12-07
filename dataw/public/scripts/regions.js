@@ -25,6 +25,10 @@ const createModalBody = document.getElementById('create-modal-body');
 const inputRegion = document.getElementById('inputRegion');
 const submitRegion = document.getElementById('submitRegion');
 
+let modalDelete = document.getElementsByClassName('modal')[0];
+let modalUpdate = document.getElementsByClassName('modal')[1];
+let modalCreate = document.getElementsByClassName('modal')[2];
+
 //Alert errores
 const treeAlert = document.getElementById('tree-alert');
 const treeAlertText = document.getElementById('tree-alert-text');
@@ -43,7 +47,7 @@ submitRegion.addEventListener('click',createRegion);
 //Funciones
 
 //Obtener todos los usuarios
-async function getRegions(params) {
+async function getRegions() {
     
     let fetchRegions = await fetch(`${basepathServer}regions`, {
         method: 'GET',
@@ -56,6 +60,7 @@ async function getRegions(params) {
     let data = await fetchRegions.json();
     let regions = data.data;
 
+    bigContainer.innerHTML = '';
     //Por cada region existente voy a crear dinamicamente su arbol de region => paises => ciudades
     for(let p = 0; p < regions.length; p++){
 
@@ -412,7 +417,7 @@ async function updateMe(event) {
 
         }else{
 
-            location.reload();
+            getRegions();
         }
 
 
@@ -457,9 +462,8 @@ async function createMe(event){
 
         }else{
 
-            location.reload();
+            getRegions();
         }
-
 
     }catch(e){
 
@@ -496,7 +500,7 @@ async function createRegion(){
 
         }else{
 
-            location.reload();
+            getRegions();
         }
         
     }catch(e){

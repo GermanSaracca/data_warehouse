@@ -3,6 +3,7 @@ const inputPassword = document.getElementById('password');
 const submitBtn = document.getElementById('btn');
 const errorsMessage = document.getElementById('errors');
 const input = document.getElementsByClassName('form-control');
+const title = document.getElementById('title-dataw');
 
 //Variable Global
 import { basepathServer } from './globals.js';
@@ -17,6 +18,17 @@ input[1].addEventListener('keydown',()=>{if(errorsMessage.innerText != ''){error
 
 //Funciones
 
+
+
+let typedOptions = {
+    strings: ['Welcome to Data Warehouse','Bienvenido a Data Warehouse'],
+    typeSpeed: 100,
+    startDelay: 650,
+    smartBackspace: true ,
+    backSpeed: 50,
+    showCursor: false
+};
+let typed = new Typed(title, typedOptions);
 
 
 //Funcion para detectar que no este logueado, si lo esta no puede acceder al login

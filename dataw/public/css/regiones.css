@@ -321,6 +321,7 @@ body main .tree-container .big-container .ul-region .ul-country {
 
 body main .tree-container .big-container .ul-region .ul-country p {
   background-color: #247BA0;
+  color: white;
   padding: .5px 10px;
   margin-left: 40px;
   border-radius: 5px;

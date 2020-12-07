@@ -41,6 +41,7 @@ async function fetchAuth(){
     
         let fetchJson = await fetchLogin.json();
 
+
         let email = fetchJson.data.email;
 
         //Mensaje de Bienvenida

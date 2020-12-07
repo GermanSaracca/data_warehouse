@@ -52,7 +52,7 @@ async function login(req,res){
         if(await bcrypt.compare(password,hashedPass)) {
 
             // Creo el Token
-            const accessToken = jwt.sign(infoUser,jwtSign);
+            const accessToken = jwt.sign(infoUser,jwtSign, {expiresIn: "8h"} );
 
             let resp = new response(false,202,user,accessToken);
             res.send(resp);
